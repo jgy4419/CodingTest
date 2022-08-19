@@ -1,0 +1,14 @@
+{
+    // extends에 부모가 될 파일을 하나 만들고 안에 적어줘야된다.
+    "extends": "./base.json",
+    "compileOnSave": true,
+    "compilerOptions": {
+        "target": "ES6",
+        "module": "commonjs",
+        "noImplicitAny": true,
+        "strictNullChecks": true,
+        "declaration": true,
+        "strict": true
+    },
+    "type": "module"
+}
