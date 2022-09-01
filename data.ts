@@ -1,18 +1,10 @@
-// 제네릭 인터페이스 함수로 지정하는 방법
-interface HelloFunctionGeneric2 {
-    <T>(message: T): T;
-}
+enum MyStatus {
+    sleep = '자는중',
+    study = '공부하는중',
+    play = '노는중',
+    work = '일하는중'
+};
 
-class Person<T, K> {
-    private _name: T;
-    private _age: K;
+const stas: MyStatus = MyStatus.play;
 
-    constructor(name: T, age: K) {
-        this._name = name;
-        this._age = age;
-    }
-}
-
-new Person('Mark', 30);
-
-new Person<string, number>('야', 2);
+console.log(stas); // 결과 노는중

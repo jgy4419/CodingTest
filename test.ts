@@ -1,20 +1,20 @@
-class Person{
-    public constructor(public _name: string, private age: number) { }
+class Parent {
+    constructor(protected _name: string, private _age: number) { }
     
-    get name() {
-        console.log('get');
-        return this._name;
+    public print(): void{
+        console.log(`이름은 ${this._name} 이고, 나이는 ${this._age} 입니다.`);
     }
-    set name(n: string) {
-        console.log('set');
-
-        this._name = n;
+    protected printName(): void{ㄴ
+        console.log(this._name, this._age);
     }
 }
 
-const p1 = new Person('jgy', 25);
-console.log('1', p1.name);
+class Child extends Parent{
+    public gender = "male";
 
-p1.name = "JGY";
-p1.name = "JGY23";
-console.log('2', p1.name);
+    constructor(age: number) {
+        super('jgy', age);
+        this.printName();
+    }
+}
+

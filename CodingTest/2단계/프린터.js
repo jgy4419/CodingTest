@@ -17,4 +17,4 @@ function solution(priorities, location) {
     console.log(answer.indexOf(location) + 1);
 }
 
-solution([1, 1, 9, 1, 1, 1], 0);
+solution([2, 1, 3, 2], 2);
