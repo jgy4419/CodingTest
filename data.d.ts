@@ -1,3 +1,4 @@
-declare function helloArray<T>(message: T[]): T;
-declare function helloTuple<T, K>(message: [T, K]): K;
-declare function helloArrays<T>(message: T[]): T[];
+interface LengthCheck {
+    length: number;
+}
+declare function func<T extends LengthCheck>(x: T): number;

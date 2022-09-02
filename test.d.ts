@@ -1,8 +1,11 @@
-declare class Person {
-    _name: string;
-    private age;
-    constructor(_name: string, age: number);
-    get name(): string;
-    set name(n: string);
+declare class Parent {
+    protected _name: string;
+    private _age;
+    constructor(_name: string, _age: number);
+    print(): void;
+    protected printName(): void;
 }
-declare const p1: Person;
+declare class Child extends Parent {
+    gender: string;
+    constructor(age: number);
+}

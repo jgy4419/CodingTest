@@ -1,10 +1,12 @@
-enum MyStatus {
-    sleep = '자는중',
-    study = '공부하는중',
-    play = '노는중',
-    work = '일하는중'
-};
+interface LengthCheck{
+    length: number
+}
 
-const stas: MyStatus = MyStatus.play;
+function func<T extends LengthCheck>(x: T) {
+    console.log(x);
+    console.log(typeof x);
+    
+    return x.length;
+}
 
-console.log(stas); // 결과 노는중
+func<string>('100');
