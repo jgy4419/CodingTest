@@ -1,12 +1,9 @@
-interface LengthCheck{
-    length: number
-}
+class Person<T, K>{
+    private _name: T;
+    private _age: K;
 
-function func<T extends LengthCheck>(x: T) {
-    console.log(x);
-    console.log(typeof x);
-    
-    return x.length;
+    constructor(name: T, age: K) {
+        this._name = name;
+        this._age = age;
+    }
 }
-
-func<string>('100');

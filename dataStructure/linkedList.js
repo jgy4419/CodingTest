@@ -38,7 +38,6 @@ class LinkedList {
     }
 
     // 데이터 중간 삽입
-
     insertAt(data, index){ // 넣을 데이터, 위치를 인자로 받는다.
         // 인덱스가 size 범위를 넘어서면 아무것도 리턴하지 않는다. ex) size는 10인데 indexfh 11이 들어오면.. 안된다는 소리 ^^
         if(index > 0 && index > this.size){

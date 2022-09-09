@@ -1,7 +1,7 @@
 "use strict";
-function func(x) {
-    console.log(x);
-    console.log(typeof x);
-    return x.length;
-}
-func('100');
+let car = {
+    color: 'white',
+    model: 'lay',
+    price: '12,000,000원'
+};
+console.log(car);

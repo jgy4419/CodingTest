@@ -155,14 +155,14 @@ class DoublyLinkedList{
 
 
 
-// function test() {
-//     let a = 3;
-//     console.log('!!');
-//     return a = 2;
-// }
+// // function test() {
+// //     let a = 3;
+// //     console.log('!!');
+// //     return a = 2;
+// // }
 
-// if (test()) {
-//     console.log('true');
-// } else {
-//     console.log('false');
-// }
+// // if (test()) {
+// //     console.log('true');
+// // } else {
+// //     console.log('false');
+// // }
