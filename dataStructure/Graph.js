@@ -6,7 +6,7 @@ class Graph {
     //  정점 추가 메서드 (addVertex)
     // 입력 받은 정점이 인접리스트에 없으면 인접리스트에 정점 key에 빈 배열을 value로 지정해준다.
     addVertex(vertex) {
-        if (!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];
+        if (!this.adjacencyList[vertex]) this.adjacencyList[vertex] = [];\
     }
     // 간선 추가 메서드 (addEdge)
     // 추가하려는 간선으로 이어진 두 개의 정점을 입력받고, 이들을 인접리스트에서 서로의 정점의 배열에 push하도록 한다.
