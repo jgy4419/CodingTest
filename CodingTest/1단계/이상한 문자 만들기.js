@@ -1,17 +1,3 @@
-// 공백 기준으로 ..
-// function solution(s) {
-//     let answer = '';
-//     for (let i = 0; i < s.length; i++){
-//         let str = '';
-//         if (i % 2 === 0) {
-//             answer += s[i].toUpperCase();
-//             continue;
-//         }
-//         answer += s[i].toLowerCase();
-//     }
-//     return answer;
-// }
-
 // 단어 기준으로 
 function solution(s) {
     let res = s.split(' ');
