@@ -1,27 +1,56 @@
+// function solution(answers) {
+//     let st = [
+//         [1, 2, 3, 4, 5],
+//         [2, 1, 2, 3, 2, 4, 2, 5],
+//         [3, 3, 1, 1, 2, 2, 4, 4, 5, 5]
+//     ];
+//     let count = 0;
+//     let countArr = [];
+//     let resArr = [];
+//     while (true) {
+//         for (let i = 0; i < st.length; i++){
+//             if (st[i].length < answers.length) {
+//                 st[i].push(...st[i]);
+//             } else {
+//                 continue;
+//             }
+//         }
+//         break;
+//     }
+//     for (let i = 0; i < st.length; i++){
+//         for (let j = 0; j < answers.length; j++){
+//             if (st[i][j] === answers[j]) {
+//                 count += 1;
+//             }
+//         }
+//         countArr.push(count);
+//         count = 0;
+//     }
+//     for (let i = 0; i < countArr.length; i++){
+//         if (Math.max(...countArr) === countArr[i]) {
+//             resArr.push(i + 1);
+//         }
+//     }
+//     return resArr;
+// }
+console.log('ress', solution([1, 2, 3, 4, 5]));
+
 function solution(answers) {
-    let answer = [];
-    // 수포자 1, 2, 3 각 변수에 담아서 배열 값으로 정의
-    let a1 = [1, 2, 3, 4, 5];
-    let a2 = [2, 1, 2, 3, 2, 4, 2, 5];
-    let a3 = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5];
+    var answer = [];
+    let st1 = [1, 2, 3, 4, 5];
+    let st2 = [2, 1, 2, 3, 2, 4, 2, 5];
+    let st3 = [3, 3, 1, 1, 2, 2, 4, 4];
     
-    for (let i = 0; i < answers.length; i++){
-        console.log('1', i % a1.length)
-        console.log('2', i % a2.length)
-        console.log('3', i % a3.length)
-    }
+    let s1t = answers.filter((a, i) => a === st1[i % st1.length]).length;
+    let s2t = answers.filter((a, i) => a === st2[i % st2.length]).length;
+    let s3t = answers.filter((a, i) => a === st3[i % st3.length]).length;
+    console.log(s1t, s2t, s3t);
 
-    let count1 = answers.filter((a, i) => a === a1[i % a1.length]).length;
-    let count2 = answers.filter((a, i) => a === a2[i % a2.length]).length;
-    let count3 = answers.filter((a, i) => a === a3[i % a3.length]).length;
-    let max = Math.max(count1, count2, count3);
+    let max = Math.max(s1t, s2t, s3t);
 
-    if (count1 === max) { answer.push(1) };
-    if (count2 === max) { answer.push(2) };
-    if (count3 === max) { answer.push(3) };
+    if (s1t === max) { answer.push(1) };
+    if (s2t === max) { answer.push(2) };
+    if (s3t === max) { answer.push(3) };
+
     return answer;
 }
-solution([1, 3, 2, 4, 2, 5, 2, 3, 4]);
-
-
-console.log(6 % 5);
