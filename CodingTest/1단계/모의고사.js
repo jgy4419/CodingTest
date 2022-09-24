@@ -39,7 +39,7 @@ function solution(answers) {
     var answer = [];
     let st1 = [1, 2, 3, 4, 5];
     let st2 = [2, 1, 2, 3, 2, 4, 2, 5];
-    let st3 = [3, 3, 1, 1, 2, 2, 4, 4];
+    let st3 = [3, 3, 1, 1, 2, 2, 4, 4, 5, 5];
     
     let s1t = answers.filter((a, i) => a === st1[i % st1.length]).length;
     let s2t = answers.filter((a, i) => a === st2[i % st2.length]).length;
