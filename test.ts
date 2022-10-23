@@ -1,7 +1,9 @@
-// 누구나 겨울이 오면, 밤의 공원
-
-function func<T extends number>(x: T) {
-    return x - 1;
+class Person{
+    public constructor(public name: string, public age: number) {
+        this.name = name;
+        this.age = age;
+    }
 }
-
-func<number>(100);
+const p1 = new Person('jgy', 25);
+console.log(p1);
+// p1.name = 
