@@ -1,9 +1,7 @@
-class Person{
-    public constructor(public name: string, public age: number) {
-        this.name = name;
-        this.age = age;
+class PersonExtends<T extends string | number>{
+    private _name: T;
+
+    constructor(name: T) {
+        this._name = name;
     }
 }
-const p1 = new Person('jgy', 25);
-console.log(p1);
-// p1.name = 
