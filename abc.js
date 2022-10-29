@@ -1,28 +1,30 @@
-class Rectangle{
-    constructor(width, height) {
-        this.width = width;
-        this.height = height;
+class Mammal {
+    constructor(name) {
+        this.name = name;
+        this.feeNum = 4;
     }
-    getArea() {
-        return this.width * this.height;
-    }
-    toString() {
-        return `width - ${this.width}. height = ${this.height}`;
+    move() {
+        console.log('움직이다.');
     }
 }
 
-class colorRectangle extends Retangle{
-    constructor(width, height, color) {
-        super(width, height);
-        this.color = color;
+class Cat extends Mammal {
+    constructor(name, age) {
+        super(name);
+        this.age = age;
     }
-    toString() {
-        return super.toString() + `, color = ${this.color}`;
+    attack() {
+        console.log('공격하다!');
+    }
+    move() {
+        console.log('날렵하게 움직이기');
+    }
+    eat() {
+        super.move();
+        console.log(super.move() + ' 그리고 소화하기');
     }
 }
 
-const colorRectangle = new ColorRectangle(2, 4, 'red');
-console.log(colorRectangle);
-
-console.log(colorRectangle.getArea());
-console.log(colorRectangle.toString());
+const cat = new Cat('야옹', 5);
+cat.move();
+cat.eat();

@@ -1,13 +1,10 @@
-class Person {
+interface Student {
     name: string;
-    inputName: string;
-    constructor(a: string) {
-        this.name = 'kim';
-        this.inputName = a;
-    }
 }
-let person1 = new Person('kim');
-let person2 = new Person('park');
+interface Student{
+    score: string
+}
 
-console.log(person1);
-console.log(person2);
+interface Teacher extends Student{
+    age: number
+}
