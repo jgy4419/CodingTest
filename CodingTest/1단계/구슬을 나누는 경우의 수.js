@@ -1,24 +1,4 @@
 // function solution(balls, share) {
-//     var answer = 1;
-//     let maxNum = balls > share ? balls : share;
-//     let [ballsNum, shareNum, minusNum] = [0, 0, 0];
-//     console.log((balls - share), balls, share);
-//     for (let i = 1; i <= maxNum; i++){
-//         answer *= i;
-//         if (i === (balls - share)) {
-//             minusNum = answer;
-//         } else if (i === share) {
-//             shareNum = answer;
-//         } else if (i === balls) {
-//             ballsNum = answer;
-//         }
-//     }
-//     return ballsNum / (minusNum * shareNum);
-// }
-
-// console.log(solution(5, 3));
-
-// function solution(balls, share) {
 //     const [n, m] = [balls, share];
 //     const fact = [BigInt(1), BigInt(1)];
 //     console.log('!', fact);

@@ -1,11 +1,18 @@
 "use strict";
-class Person {
-    constructor(name, age) {
-        this.name = name;
-        this.age = age;
-        this.name = name;
-        this.age = age;
+let userA = {
+    name: 'Neo',
+    age: 85,
+    isValid: true
+};
+let userB = ['Evan', 36, false];
+function someFunc(arg) {
+    switch (arg) {
+        case 's':
+            return arg.toString(); // string
+        case 'n':
+            return parseInt(arg); // number
+        default:
+            return true; // boolean
     }
 }
-const p1 = new Person('jgy', 25);
-console.log(p1);
+console.log(someFunc('s'));

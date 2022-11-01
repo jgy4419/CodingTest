@@ -1,10 +1,6 @@
-interface Student {
-    name: string;
-}
-interface Student{
-    score: string
-}
-
-interface Teacher extends Student{
-    age: number
-}
+type MyType<T> =
+    T extends string ? 'Str' :
+    T extends number ? 'Num' :
+    T extends boolean ? 'Boo' :
+    T extends undefined ? 'Und' :
+    T extends null ? 'Nul' : 'Obj';
