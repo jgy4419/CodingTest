@@ -1,10 +1,1 @@
-declare type MyType = string;
-declare type YourType = string | number | boolean;
-declare type TUser = {
-    name: string;
-    age: number;
-    isValid: boolean;
-} | [string, number, boolean];
-declare let userA: TUser;
-declare let userB: TUser;
-declare function someFunc(arg: MyType): YourType;
+declare type MyType<T> = T extends string ? 'Str' : T extends number ? 'Num' : T extends boolean ? 'Boo' : T extends undefined ? 'Und' : T extends null ? 'Nul' : 'Obj';
