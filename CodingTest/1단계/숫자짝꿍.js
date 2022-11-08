@@ -17,7 +17,8 @@
 function solution(X, Y) {
     var answer = [];
     let arr = Y.split('');
-    for (let i = 0; i < X.length; i++){
+    let arrLength = X.length;
+    for (let i = 0; i < arrLength; i++){
         if (arr.includes(X[i])) {
             arr.splice(arr.indexOf(X[i]), 1)
             answer.push(X[i]);

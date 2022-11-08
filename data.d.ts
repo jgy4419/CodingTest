@@ -1,3 +1,1 @@
-declare const foo = "Hello nullish.";
-declare const bar = false;
-declare const baz = 0;
+declare const foo = "Hello nullish";

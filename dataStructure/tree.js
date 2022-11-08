@@ -30,8 +30,10 @@ class Tree {
     }
 }
 
-let tree = new Tree(3);
+let tree = new Tree(1);
 tree.insertNode(5);
 tree.insertNode(9);
+tree.insertNode(2);
+tree.insertNode(7);
 console.log(tree.contains(5));
-console.log(tree);
+console.log('tree', tree);

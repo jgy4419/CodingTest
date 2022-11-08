@@ -4,43 +4,25 @@
 */
 
 class Stack {
-    #items;
-    #count;
     constructor() {
-        this.#items = [];
-        this.#count = 0;
+        this._arr = [];
     }
-    in(data) {
-        // 배열의 마지막 위치에 추가해주기
-        this.#items[this.#count] = data;
-        // or this.#items.push(data);
-        this.#count++;
+    push(item) {
+        this._arr.push(item);
     }
-    out() {
-        this.#items.pop();
-        // or this.#item.splice(this.#count - 1, 1);
-        this.#count--;
+    pop() {
+        return this._arr.pop();
     }
-    // 가장 마지막으로 들어온 데이터 확인
+    // 가장 마지막에 있는 값 보기
     peek() {
-        return this.#items[this.#count - 1];
-    }
-
-    get() {
-        console.log('size = ', this.#count, 'items == ', this.#items);
-        return this.#items;
+        return this._arr[this._arr.length - 1];
     }
 }
 
 const stack = new Stack();
-stack.in('사과-0');
-stack.in('수박-1');
-console.log(stack.peek());
-stack.in('바나나-2');
-stack.in('참외-3');
-
-stack.get();
-
-stack.out();
-
-stack.get();
+stack.push(1);
+stack.push(2);
+stack.push(3);
+console.log(stack.peek()); // 3
+stack.pop();
+console.log(stack.peek()); // 2
