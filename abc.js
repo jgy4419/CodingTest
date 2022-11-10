@@ -53,11 +53,11 @@ console.log(result4);
 const numbers = [2, -5, -123, 59, -5480, 24, 0, -69, 349, 3];
 const result2 = numbers.reduce((acc, cur, idx) => {
     console.log('acc', acc);
-    // if (cur < 0) {
-    //     acc[0]++;
-    // } else if (cur > 0) {
-    //     acc[1]++;
-    // }
+    if (cur < 0) {
+        acc[0]++;
+    } else if (cur > 0) {
+        acc[1]++;
+    }
     return acc;
 }, [0, 0]);
 console.log(result2);
