@@ -29,7 +29,7 @@ console.log(prototype);
 let book = prototype.clone();
 console.log(book);
 
-// 클래스로
+클래스로
 class Book2{
     constructor(title, price) {
         this.title = title;
@@ -53,17 +53,21 @@ class Book2Prototype{
     }
 }
 
+
+
 let sampleBook2 = new Book2('React', '1000');
 let prototype2 = new Book2Prototype(sampleBook2);
 let book2 = prototype2.clone();
 console.log(book2); // Book2 { title: 'React', price: '1000' }
 
-let book = {
+
+// 자바스크립트에는 자체 내장 프로토타입 기능이 있기 때문에, 아래의 방법으로 효과적으로 이 패턴을 사용할 수 있다.
+let book2 = {
     title: 'JavaScript',
     price: 15,
 }
 
-let anotherBook = Object.assign({ say: true }, book);
+let anotherBook = Object.assign({ say: true }, book2);
 console.log(anotherBook);
-let anotherBook2 = { say: true, ...book };
+let anotherBook2 = { say: true, ...book2 };
 console.log(anotherBook2);

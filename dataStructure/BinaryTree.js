@@ -1,5 +1,11 @@
+// https://soldonii.tistory.com/75
+
+let callback = function (value) {
+  arr.push(value);
+};
+
 class BinarySearchTree {
-    //BST의 constructor를 구현합니다.
+    // BST의 constructor를 구현합니다.
     constructor(value) {
       this.value = value;
       this.left = null;
@@ -79,6 +85,7 @@ class BinarySearchTree {
     }
   }
 
+let arr = [];
 
 let tree = new BinarySearchTree(10);
 tree.insert(5);
@@ -89,3 +96,4 @@ console.log(tree.contains(5));
 console.log(tree.contains(3)); 
 console.log(tree.contains(9)); 
 console.log('tree', tree);
+console.log(tree.postorder(2));

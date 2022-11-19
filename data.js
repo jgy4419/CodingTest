@@ -1,77 +1,18 @@
-"use strict";
-// function isNumber(val: string | number): val is number {
-//     return typeof val === 'number';
-// }
-// function someFunc(val: string | number) {
-//     if (isNumber(val)) {
-//         val.toFixed(2);
-//         isNaN(val);
-//     }
-// }
-// interface ICat {
-//     name: string
-// }
-// class Cat5 implements ICat {
-//     constructor(public name: string) {}
-// }
-// interface IUser {
-//     [userProp: string]: string | boolean;
-// }
-// let user: IUser = {
-//     name: 'Neo',
-//     email: 'jgy_98@naver.com',
-//     isValid: true,
-//     0: false
-// };
-// console.log(user['name']);
-// // 
-// type MyTypes<T> = T extends infer R ? R : null;
-// const a: MyTypes<number> = 123;
-// console.log(a);
-// // 오버로드
-// interface IUser2 {
-//     name: string;
-//     age: number;
-//     getData(x: string): string[];
-//     getData(x: number): string;
-// }
-// let user2: IUser2 = {
-//     name: 'Neo',
-//     age: 36,
-//     getData: (data: any) => {
-//         if (typeof data === 'string') {
-//             return data.split('');
-//         } else {
-//             return data.toString();
-//         }
-//     }
-// }
-// // 추상
-// abstract class Animal {
-//     abstract name: string;
-//     abstract getName(): string;
-// }
-// class Cat extends Animal {
-//     constructor(public name: string) {
-//         super();
-//     }
-//     getName() {
-//         return this.name;
-//     }
-// }
-// interface IAnimal { 
-//     name: string;
-//     getName(): string;
-// }
-// nullish
-const foo = null !== null && null !== void 0 ? null : 'Hello nullish';
-console.log(foo);
-/*
-    Document.getElementById
-    ex) getElementById(elementById: string): HTMLElement | null;
-    - 문자열 id 요소가 전달되면 HTMLElement 또는 null이 반환된다.
-    
-    Document.createElement
-    ex 1) createElement<K extends keyof HTMLElementTagNameMap>(tagName: K, options?: ElementCreationOptions): HTMLElementTagNameMap[K];
-    ex 2) createElement(tagName: string, options?: ElementCreationOptions): HTMLElement;
-*/ 
+var users;
+users = [[1, 'Neo', true], [2, 'Evan', false], [3, 'Lew', true]];
+// Tuple은 정해진 타입의 고정된 길이 배열을 표현하지만, 이는 할당에 국한된다.
+// .push()니 .splice() 등을 통해 값을 넣는 행위는 막을 수 없다.
+var tuple;
+tuple = ['a', 1];
+tuple = ['b', 2];
+// Enum
+var Week;
+(function (Week) {
+    Week[Week["Sum"] = 0] = "Sum";
+    Week[Week["Mon"] = 23] = "Mon";
+    Week[Week["Tue"] = 24] = "Tue";
+    Week[Week["Wed"] = 25] = "Wed";
+    Week[Week["Thu"] = 26] = "Thu";
+})(Week || (Week = {}));
+console.log(Week.Mon);
+console.log(Week.Tue);

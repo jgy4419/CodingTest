@@ -1,4 +1,12 @@
 // 트리 공부 하기 https://velog.io/@porupit0122/JavaScript-%EC%9E%90%EB%A3%8C%EA%B5%AC%EC%A1%B0-4-%ED%8A%B8%EB%A6%AC
+
+/* 
+    코드 포인트
+        - 현재 노드의 값을 받을 변수 선언
+        - 자식 노드의 값을 담기 위한 배열을 변수로 선언
+        - 자식 노드 생성 : new 키워드를 통해 객체 생성 후 위에서 만든 배열에 push 해주기
+        - 트리 노드 값을 조회 : 현재 노드를 먼저 조회한 뒤 재귀 패턴으로 다시 노드 조희
+*/
 class Tree {
     constructor(value) {
         this.value = value;
@@ -29,6 +37,7 @@ class Tree {
         return false;
     }
 }
+
 
 let tree = new Tree(1);
 tree.insertNode(5);
