@@ -10,57 +10,81 @@ function Command(operation) {
 }
 
 Command.prototype.execute = function () {
-    this.operation.execute(); // 들어온 함수(클래스)의 execute 실행.
+    this.operation.execute();
 }
 
 function ProcessCreditCardPayment() {
     return {
-        execute: function(){
+        execute: function () {
             console.log('Credit Card');
-        }       
+        }
     }
 }
 
 function ProcessPayPalPayment() {
     return {
         execute: function () {
-            console.log('PayPal')
+            console.log('')
         }
     }
 }
 
-function ProcessStripPayment() {
-    return {
-        execute: function () {
-            console.log('Strip');
-        }
-    };
-}
+// function Command(operation) {
+//     this.operation = operation;
+// }
 
-function CreditCardCommand() {
-    return new Command(new ProcessCreditCardPayment());
-}
+// Command.prototype.execute = function () {
+//     this.operation.execute(); // 들어온 함수(클래스)의 execute 실행.
+// }
 
-function PayPalCommand() {
-    return new Command(new ProcessPayPalPayment());
-}
+// function ProcessCreditCardPayment() {
+//     return {
+//         execute: function(){
+//             console.log('Credit Card');
+//         }       
+//     }
+// }
 
-function StripeCommand() {
-    return new Command(new ProcessStripPayment());
-}
+// function ProcessPayPalPayment() {
+//     return {
+//         execute: function () {
+//             console.log('PayPal')
+//         }
+//     }
+// }
 
-function PaymentSystem() {
-    let paymentCommand;
-    return {
-        setPaymentCommand: function (command) {
-            paymentCommand = command;
-        },
-        excuteCommand: function () {
-            paymentCommand.execute();
-        }
-    }
-}
+// function ProcessStripPayment() {
+//     return {
+//         execute: function () {
+//             console.log('Strip');
+//         }
+//     };
+// }
 
-let payment = new PaymentSystem();
-payment.setPaymentCommand(new CreditCardCommand());
-payment.excuteCommand(); // 결과 : Credit Card
+// function CreditCardCommand() {
+//     return new Command(new ProcessCreditCardPayment());
+// }
+
+// function PayPalCommand() {
+//     return new Command(new ProcessPayPalPayment());
+// }
+
+// function StripeCommand() {
+//     return new Command(new ProcessStripPayment());
+// }
+
+// function PaymentSystem() {
+//     let paymentCommand;
+//     return {
+//         setPaymentCommand: function (command) {
+//             paymentCommand = command;
+//         },
+//         excuteCommand: function () {
+//             paymentCommand.execute();
+//         }
+//     }
+// }
+
+// let payment = new PaymentSystem();
+// payment.setPaymentCommand(new CreditCardCommand());
+// payment.excuteCommand(); // 결과 : Credit Card

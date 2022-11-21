@@ -8,7 +8,7 @@ function solution(arr1, arr2) {
         value.map((val, j_index) => { 
             // console.log(val)
             console.log('val', val);
-            console.log('val2', arr2[i_index][col - 1]);
+            console.log('val2', arr2[i_index][col]);
             console.log('res', val * arr2[i_index][j_index]);
             count++;
             // console.log(val * arr2[j_index]);
