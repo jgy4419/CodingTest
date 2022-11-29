@@ -44,7 +44,9 @@
 //     return answer.length === 0 ? 0 : Math.max(...answer);
 // }
 
-console.log(solution([14, 35, 119], [18, 30, 102]));
+
+// 문제 url : https://school.programmers.co.kr/learn/courses/30/lessons/135807
+
 
 // arrayA = 철수, arrayB = 영희
 function solution(arrayA, arrayB) {
@@ -59,7 +61,11 @@ function solution(arrayA, arrayB) {
 function getDvsr(arrayA, arrayB) {
     let answer = 0;
     // 최대 공약수를 구하는 재귀 함수
-    const god = (a, b) => a % b === 0 ? b : god(b, a % b);
+    const god = (a, b) => {
+        console.log('a', a);
+        console.log('b', b);
+        return a % b === 0 ? b : god(b, a % b);
+    }
     // arrayA 배열에 담긴 값의 최대 공약수를 구하기
     arrayA.forEach(val => answer = god(answer, val));
 
@@ -68,3 +74,11 @@ function getDvsr(arrayA, arrayB) {
     // 나누어지지 않으면 최대공약수 return
     return answer;
 }
+
+console.log(solution([10, 20], [5, 17]));
+
+
+// 유클리드 호제법의로 최대 공약수를 구한다.
+// 고차함수 some()를 사용하여 하나라도 true면 0을 return 하게 한다.
+
+// some이란? : 배열 안의 어떤 요소라도 주어진 판별 함수를 통과하는지 테스트합니다.
