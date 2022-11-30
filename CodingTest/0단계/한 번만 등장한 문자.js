@@ -10,4 +10,4 @@ function solution(s) {
     return answer.sort().join('');
 }
 
-console.log(solution("hello"));
+console.log(solution("hello")); 
