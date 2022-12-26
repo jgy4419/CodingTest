@@ -3,7 +3,6 @@
     어려운 문제에 어떻게 접근할지?, 면접이든 부수적인 프로젝트를 진행하든 어떻게 더 잘 해결할 수 있는지? 
     - 이 두 가지 단계에 대해 살펴보면서 우선 문제를 해결하기 위한 계획을 수립하기. (코드를 작성하기 전에 새로운 문제에 어떻게 접근할지 고민하는 것은 골치 아픈 문제이다.)
     - 일반적인 문제 해결 패턴을 습득하기. (때때로 유용하게 쓰일 수 있는 몇 가지 일반적인 패턴 살펴보기)
-    - 
 */
 
 /* 
@@ -41,18 +40,18 @@ function myFunc(a, b) {
 // console.log(myFunc([1, 2, 3], [4, 4, 1])); // result => false
 
 // ex1 중첩루프를 이용한 문제풀이
-// function same(arr1, arr2) {
-//     if (arr1.length !== arr2.length) return false;
-//     for (let i = 0; i < arr1.length; i++){
-//         // 제곱한 값이 arr2에 있는지 확인 없으면 -1를 반환
-//         let correctIndex = arr2.indexOf(arr1[i] ** 2);
-//         if (correctIndex === -1) { // -1 반환하면 false를 return 한다.
-//             return false;
-//         }
-//         arr2.splice(correctIndex, 1);
-//     }
-//     return true;
-// }
+function same(arr1, arr2) {
+    if (arr1.length !== arr2.length) return false;
+    for (let i = 0; i < arr1.length; i++){
+        // 제곱한 값이 arr2에 있는지 확인 없으면 -1를 반환
+        let correctIndex = arr2.indexOf(arr1[i] ** 2);
+        if (correctIndex === -1) { // -1 반환하면 false를 return 한다.
+            return false;
+        }
+        arr2.splice(correctIndex, 1);
+    }
+    return true;
+}
 
 /* 
     바로 위 문제풀이는 O(n^2), 즉, 제곱 시간이 사용되기 때문에 순진한 접근법이라 불린다.
@@ -99,7 +98,7 @@ function same(arr1, arr2) {
 /* 
     빈도 카운트 정리
     - 보통 객체를 사용한다. 객체를 사용하여 프로파일을 구성하는 것은 배열이나 문자열의 내용을 분석하는 방법으로 보통 배열이나 문자열과 같은 선형 구조를 구성하는 것이다.
-    그러면 해당 분석을 문자열이나 배열에서 생성된 다른 객체의 형태와 신속하게 비교할 수 있다.
+        그러면 해당 분석을 문자열이나 배열에서 생성된 다른 객체의 형태와 신속하게 비교할 수 있다.
     - 따라서 두 개의 배열을 객체로 세분화하여 각 배열의 요소들을 분류한 다음 각 배열을 비교할 수 있다. 이런 식으로 코드를 크게 향상시킬 수 있다.
 */
 
@@ -116,7 +115,7 @@ function validAnagram(str1, str2) {
     if (str1 === '' && str2 === '') return true;
     if (str1.length !== str2.length) return false;
     let chg_str1 = {};
-    let chg_str2 = {};
+    let chg_str2 = {};  
     for (let val of str1) {
         chg_str1[val] = (chg_str1[val] || 0) + 1;
     }

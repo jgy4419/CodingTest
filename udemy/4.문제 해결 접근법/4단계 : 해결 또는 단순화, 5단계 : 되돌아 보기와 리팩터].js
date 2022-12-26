@@ -67,7 +67,6 @@ console.log(charCount('Yout PIN number is 1234!'));
 // 리팩토링 이후 코드 
 function charCount2(str) {
     let result = {};
-    // for (let i = 0; i < str.length; i++){
     for(let char of str){
         // 대문자를 -> 소문자로 변환
         char = char.toLowerCase();
@@ -78,9 +77,9 @@ function charCount2(str) {
             // } else {
             //     result[char] = 1;
             // }   
-            
+
             // 아래처럼 변경 가능. 
-            result[char] = ++result[char] || 1; // 값이 이미 있으면 추가하고 없으면 값을 1로 설정
+            result[char] = ++result[char] || 1; // 값이 이미 있으면 추가하고 없으면 값을 1로 설정.
         }
     }
     return result; 
@@ -103,7 +102,7 @@ function charCount3(str) {
 }
 
 // 정규표현식 보다 문자 코드를 사용하는 것이 더 효율적일 수도 있다.
- function isAlphaNumeric(char) {
+function isAlphaNumeric(char) {
     let code = char.charCodeAt(0);
     if (!(code > 47 && code < 58) && // numberic (0-9)
         !(code > 64 && code < 91) && // upper alpha (A-Z)
