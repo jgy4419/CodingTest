@@ -29,6 +29,9 @@ function func2(animal: Fish | Bird) {
     - instanceof는 해당 오브젝트가 부모가 누군지 검사해주는 코드.
 */
 let date = new Date();
-if (date instanceof Date) {
-    
+
+type funcType = (x: string) => string;
+
+const cutZero: funcType = (str) => {
+    if( q)
 }

@@ -3,8 +3,9 @@ function solution(k, tangerine) {
     var answer = 0;
     let sum = 0;
     let obj = {};
+    // obj 객체에 obj[t]가 정의되지 않았으면 0 정의되어 있으면 해당 값에서 + 1 해줌.
     tangerine.forEach((t) => obj[t] = (obj[t] || 0) + 1);
-    
+
     // let sorted = [];
     // for (let data in obj) {
     //     sorted.push([data, obj[data]])
