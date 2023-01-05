@@ -135,6 +135,9 @@ let user: IUser2 = {
     keyof : keyof를 사용하면 속성 이름을 타입으로 사용할 수 있다. (42%)
 */
 
+
+
+
 /* 
     TypeScript 도약하기
     1. TS 역할
