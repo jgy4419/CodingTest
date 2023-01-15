@@ -31,3 +31,6 @@ function merge(arr1, arr2) {
 }
 
 console.log(mergeSort([5, 30, 12, 4, 25, 34, 1, 43, 100, 20, 10]));
+
+
+
