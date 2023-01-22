@@ -58,7 +58,7 @@ class SinglyLinkedList {
             this.head = newNode;
         }
         this.length++;
-        return this.
+        return this;
     }
     get(index) {
         if (index < 0 || this.length <= index) return null;
@@ -75,14 +75,53 @@ class SinglyLinkedList {
         let foundNode = this.get(index);
         if(foundNode){
             foundNode.val = val;
-            return truel
+            return true;
         }
         return false;
+    }
+    insert(index, val) {
+        if (index < 0 || index > this.length) return false;
+        if (index === this.length) this.push();
+        if (index === 0) this.unshift(val);
+        this.get(index - 1);
+        let node = new Node(val);
+        
+        this.length++;
+    }
+    print() {
+        let arr = [];
+        let current = this.head;
+        while (current) { 
+            arr.push(current.val);
+            current = current.next;
+        }
+        console.log(arr);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+    }
+    reverse() {
+        let node = this.head;
+        this.head = this.tail;
+        this.tail = node;
+        let next;
+        let prev = null;
+        for (let i = 0; i < this.length; i++) {
+            next = node.next;
+            node.next = prev;
+            prev = node;
+            node = next;
+        }
+        return this;
     }
 }
 
 let list = new SinglyLinkedList();
-list.push("Hello");
-list.push("Good Bye");
-// console.log(list);
-console.log(list.pop());
+list.push(100);
+list.push(201);
+list.push(250);
+list.push(350);
+list.push(999);
+console.log('보여줘', 'head',  list.head, '보어쟈ㅜ tail', list.tail);
+console.log(list.print());
+
+console.log(list.reverse());
+console.log('!', 'head',  list.head, 'tail', list.tail);
+console.log(list.print());
