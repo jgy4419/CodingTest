@@ -57,12 +57,96 @@ class DoublyLinkedList{
         this.length--;
         return oldHead;  
     }
+    unshift(val) {
+        const newNode = new Node(val);
+        if (this.length === 0) {
+            this.head = newNode;
+            this.tail = newNode;
+        } else {
+            this.head.prev = newNode;
+            newNode.next = this.head;
+            this.head = newNode;
+        }
+        this.length++;
+        return this;
+    }
+    get(index) {
+        if (index < 0 || index >= this.length) return null;
+        let count, current;
+        if (index <= this.length / 2) {
+            count = 0;
+            current = this.head;
+            while (count != index) {
+                current = current.next;
+                count++;
+            }   
+        } else { 
+            count = this.length - 1;
+            current = this.tail;
+            while (count != index) {
+                current = current.prev;
+                count--;
+            }
+        }
+        return current;
+    }
+    set(index, val) {
+        let foundNode = this.get(index);
+        if (foundNode != null) {
+            foundNode.val = val;
+            return true;
+        }
+        return false;
+    }
+    insert(index, val) {
+        if (index < 0 || index > this.length) return false;
+        if (index === 0) return !!this.unshift(val);
+        if (index === this.length) return !!this.push(val);
+
+        let newNode = new Node(val);
+        // 우리가 삽입해야되는 곳 바로 앞에 요소를 찾아야 된다.
+        let beforeNode = this.get(index - 1);
+        let afterNode = beforeNode.next;
+
+        // before 노드를 찾고 -> beforeNode.next로 after 노드를 찾기.
+        beforeNode.next = newNode, newNode.prev = beforeNode;
+        newNode.next = afterNode, afterNode.prev = newNode;
+        this.length++;
+        return true;
+    }
+    remove(index) {
+        if (index < 0 || index >= this.length) return null;
+        if (index === 0) return this.shift();
+        if (index === this.length - 1) return this.pop();
+
+        let removeNode = this.get(index);
+        // 124 ~ 128번 줄을
+        let beforeNode = removedNode.prev;
+        let afterNode = removeNode.next;
+
+        beforeNode.next = afterNode;
+        afterNode.prev = beforeNode;
+        // 아래처럼 작성해도 된다!
+        // removeNode.prev.next = removeNode.next;
+        // removedNode.next.prev = removeNode.prev;
+
+        // 찾은 노드의 next와 prev를 null로 설정하기. (남아있는 기준점들을 없애주기.)
+        removeNode.next = null;
+        removeNode.prev = null;
+
+        this.length--;
+        return removeNode;
+    }
 }
 
 const list = new DoublyLinkedList();
-list.push(99);
-list.push(150);
-list.push(100);
+list.push(4);
+list.push(501);
+list.push(401);
+list.push(230);
+
+console.log(list.insert(0, 11));
+console.log(list.insert(10, 11));
+console.log(list.insert(2, 11));
+
 console.log(list);
-console.log(list.shift());
-console.log(list.shift());
