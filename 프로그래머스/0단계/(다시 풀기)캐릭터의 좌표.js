@@ -1,24 +1,23 @@
 function solution(keyinput, board) {
-    var answer = [0, 0];
-    let minus = [0, 0];
-    for (let i = 0; i < keyinput.length; i++){
-        if (keyinput[i] === 'right') minus[0]++;
-        else if (keyinput[i] === 'left') minus[0]--;
-        else if (keyinput[i] === 'up') minus[1]++;
-        else minus[1]--;
+    // 나의 위치
+    const pos = [0,0]
+    // 방향 별 변화량
+    const key = {
+        up: [0,1], 
+        down: [0,-1], 
+        left: [-1,0], 
+        right: [1,0]
     }
-    if (minus[0] !== 0 && minus[1] !== 0) return minus;
-    else {
-        if (minus[0] !== 0) {
-            answer[0] = 0;
-            answer[1] = board[1] - minus[1];
+    // 최대 이동 가능거리
+    const wall = [board[0]/2 << 0 , board[1]/2 << 0]
+    keyinput.forEach(dir => {
+        // 벽을 만나지 않았다면 이동
+        if(Math.abs(pos[0]+key[dir][0]) <= wall[0] && Math.abs(pos[1]+key[dir][1]) <= wall[1]) {
+            pos[0]+=key[dir][0]
+            pos[1]+=key[dir][1]
         }
-        else if (minus[1] !== 0) {
-            answer[1] = 0;
-            answer[1] = -(board[1] + minus[1]);
-        }
-        return answer;
-    }
+    })
+    return pos
 }
 
 console.log(solution(["left", "right", "up", "right", "right"], [11, 11]));
