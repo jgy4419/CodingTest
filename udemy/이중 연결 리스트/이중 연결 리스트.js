@@ -6,6 +6,71 @@ class Node{
 	}
 }
 
+class DoubleLinkedList {
+    constructor(val) {
+        this.head = null;
+        this.tail = null;
+        this.length = 0;
+    }
+    push(val) {
+        const newNode = new Node(val);
+        if (this.length === 0) {
+            this.head = newNode;
+            this.tail = newNode;
+        } else {
+            this.tail.next = newNode;
+            newNode.prev = this.tail;
+            newNode = this.tail;
+        }
+        this.length++;
+        return this;
+    }
+    pop() {
+        let popedNode = this.tail;
+        if (this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            this.tail = popedNode.prev;
+            this.tail.next = null;
+            popedNode.prev = null;
+        }
+        this.length--;
+        return popedNode; // 삭제된 노드
+    }
+    shift() {
+        let oldNode = this.head;
+        if (this.length === 1) {
+            this.head = null;
+            this.tail = null;
+        } else {
+            this.head = oldNode.next;
+            this.head.prev = null;
+            oldNode.next = null;
+        }
+        this.length--;
+        return oldNode;
+    }
+    unShift(val) {
+        let newNode = new Node(val);
+        if (this.length === 0) {
+            this.head = newNode;
+            this.tail = newNode;
+        } else {
+            this.head.prev = newNode;
+            newNode.next = this.head;
+            this.head = newNode;
+        }
+        this.length++;
+        return this;
+    }
+    // 여기부터 복습하기.
+    get(index) {
+        
+    }
+}
+
+
 class DoublyLinkedList{
 	constructor(val){
 		this.head = null;
