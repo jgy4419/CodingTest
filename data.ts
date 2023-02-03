@@ -13,4 +13,4 @@ function getAge(this: typeof cat) {
     age: '13' // String
   };
 const getAgeForDog: OmitThisParameter<typeof getAge> = getAge;
-//   getAge.call(dog); 
+//   getAge.call(dog);  

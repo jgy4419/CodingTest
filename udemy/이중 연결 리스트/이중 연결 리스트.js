@@ -66,7 +66,63 @@ class DoubleLinkedList {
     }
     // 여기부터 복습하기.
     get(index) {
-        
+        if (index >== this.length && index < 0) return null;
+        let count, current;
+        if (index <= this.length / 2) {
+            current = this.head;
+            count 0;
+            while (count != index) {
+                current = current.next;
+                count++;
+            }
+        } else {
+            current = this.tail;
+            count = this.length - 1;
+            while (count != index) {
+                current = current.prev;
+                count--;
+            }
+        }
+        return current;
+    }
+    set(index, val) {
+        let foundNode = this.get(index);
+        if (foundNode !== null) {
+            foundNode.val = val;
+            return true;   
+        } else {
+            return false;
+        }
+    }
+    insert(index, val) {
+        if (index < 0 || index > this.length) return false;
+        if (this.length === 0) this.shift(val);
+        if (this.length === index) this.push(val);
+
+
+        let newNode = new Node(val);
+        let beforeNode = this.get(index - 1);
+        let afterNode = beforeNode.next;
+
+        beforeNode.next = newNode, newNode.prev = beforeNode;
+        afterNode.prev = afterNode, newNode.next = afterNode;
+        this.length++;
+        return true;
+    }
+    remove(index) {
+        if (index < 0 || index === this.length) return null;
+        if (index === 0) return this.shift();
+        if (index === this.length - 1) return this.pop();
+
+        let removeNode = this.get(index);
+        let beforeNode = removeNode.prev;
+        let afterNode = removeNode.next;
+        beforeNode.next = afterNode;
+        afterNode.prev = beforeNode;
+
+        removeNode.prev = null, removeNode.next = null;
+        this.length--;
+        return removeNode;
     }
 }
 
