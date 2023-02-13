@@ -1,16 +1,15 @@
-function getAge(this: typeof cat) {
-    return this.age;
-  }
-  
-  // 기존 데이터
-  const cat = {
-    age: 12 // Number
-  };
-  getAge.call(cat); // 12
-  
-  // 새로운 데이터
-  const dog = {
-    age: '13' // String
-  };
-const getAgeForDog: OmitThisParameter<typeof getAge> = getAge;
-//   getAge.call(dog);  
+type ShortPoemBase = { author: string };
+type Haiku = ShortPoemBase & { kigi: string; type: "haiku" };
+type Villanelle = ShortPoemBase & { meter: number; type: "villanelle" };
+type ShortPoem = Haiku | Villanelle;
+
+/* 
+  Error: Type '{author: strinng; type: "villanelle";}'
+  '{ author: string; type: "villanelle"; }' 형식은 'ShortPoem' 형식에 할당할 수 없습니다.
+  '{ author: string; type: "villanelle"; }' 형식은 'Villanelle' 형식에 할당할 수 없습니다.
+    'meter' 속성이 '{ author: string; type: "villanelle"; }' 형식에 없지만 '{ meter: number; type: "villanelle"; }' 형식에서 필수입니다.
+*/
+const oneArt: ShortPoem = {
+  author: "Elizabeth Bishop",
+  type: "villanelle"
+}

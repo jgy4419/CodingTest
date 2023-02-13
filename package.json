@@ -11,7 +11,8 @@
   "license": "ISC",
   "types": "./test.d.ts",
   "dependencies": {
-    "axios": "0.27.2"
+    "axios": "0.27.2",
+    "upgrade": "1.1.0"
   },
   "type": "module"
 }
