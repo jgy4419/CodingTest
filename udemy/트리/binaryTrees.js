@@ -64,6 +64,42 @@ class BinarySearchTree {
         }
         return data;
     }
+    DFSPreOrder() {
+        // 노드를 방문하는 순서
+        let data = [];
+        // current가 있는 이유는 사용자가 시작하기를 원하는 노드가 있을 수 있기 때문이다.
+        // 꼭 루트부터 순회를 하지는 않을 수도 있을테니까.
+        let current = this.root;
+        function traverse(node) {
+            data.push(node.value);
+            if (node.left) traverse(node.left);
+            if(node.right) traverse(node.right);
+        }
+        traverse(current);
+        return data;
+    }
+    DFSPostOrder() {
+        let data = [];
+        let current = this.root;
+        function traverse(node) {
+            if (node.left) traverse(node.left);
+            if (node.right) traverse(node.right);
+            data.push(node.value);
+        }
+        traverse(current);
+        return data;
+    }
+    DFSInOrder() {
+        let data = [];
+        let current = this.root;
+        function traverse(node) {
+            node.left && traverse(node.left);
+            data.push(node.value);
+            node.right && traverse(node.right);
+        }
+        traverse(current);
+        return data;
+    }
 }
 
 
@@ -74,4 +110,4 @@ tree.insert(15);
 tree.insert(3);
 tree.insert(8);
 tree.insert(20);
-console.log(tree.BFS());
+console.log(tree.DFSInOrder());
