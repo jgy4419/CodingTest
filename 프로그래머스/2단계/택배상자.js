@@ -6,6 +6,21 @@
     2. 순차적인 배열은 first in lastout, order 배열은 first out으로 order 값을 shift 해주기. (count 1씩 증가.)
     3. order 기준으로 순차, order 배열을 빼다가 order복사본 배열 이랑 순차 배열에 끝에 값이 동일하지 않으면 해당 값 반환시켜주기.
 */
+// function solution(order) {
+//     const inTureArr = Array.from({length: order.length + 1}, (v, i) => i + 1);
+//     const beforeArr = inTureArr.splice(0, order[0] - 1);
+//     const afterArr = inTureArr.splice(1);
+//     let count = 1;
+//     for(let i = 1; i < order.length; i++) {
+//         if(beforeArr.pop() === order[i] || afterArr.shift(0, 1) === order[i]) {
+//             console.log(order[i], beforeArr, afterArr)
+//             count++;   
+//         }else {
+//             break;
+//         }
+//     }
+//     return count;
+// }
 
 function solution(order){
     let idx = 0;
