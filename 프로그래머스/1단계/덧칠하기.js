@@ -22,8 +22,6 @@ function solution(n, m, section) {
             answer++;
         }
     }
-    // console.log(painting);
-
     return answer;
 }
 
