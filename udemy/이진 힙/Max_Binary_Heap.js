@@ -1,3 +1,8 @@
+/* 
+    - 이진 힙은 트리와 다른점은 먼저 부모 노드가 항상 자식 노드보다 큰 값을 가진다는 것이다.
+    - 이진 탐색 트리와 다르게 왼쪽과 오른쪽에는 순서가 존재하지 않는다.
+*/
+
 class MaxBinaryHeap {
     constructor() {
         this.values = [];
@@ -12,7 +17,6 @@ class MaxBinaryHeap {
         while (idx > 0) {
             let parentIdx = Math.floor((idx - 1) / 2);
             let parent = this.values[parentIdx];
-            let element = this.values[parentIdx];
             if (element <= parent) break;
             this.values[parentIdx] = element;
             this.values[idx] = parent;
@@ -26,7 +30,6 @@ class MaxBinaryHeap {
         this.values[0] = end;
         // 버블다운 해주기.
         if (this.values.length > 0) {
-            this.values[0] = end;
             this.sinkDown();   
         }
         return max;
@@ -81,7 +84,7 @@ heap.insert(55);
 
 console.log(heap.values);
 heap.extractMax();
-heap.extractMax();
-heap.extractMax();
-heap.extractMax();
+// heap.extractMax();
+// heap.extractMax();
+// heap.extractMax();
 console.log(heap.values);

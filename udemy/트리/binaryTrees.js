@@ -65,6 +65,7 @@ class BinarySearchTree {
         }
         return data;
     }
+
     DFSPreOrder() {
         // 노드를 방문하는 순서
         let data = [];
