@@ -1,49 +1,24 @@
+/* 
+  가로 세로가 특정 값일 때 yellow brown을 구할 수 있으니,
+  가로 세로 값을 하나씩 올리면서 그때의 yellow 값과 brown 값을 비교해 답을 찾기.
+*/
+
 function solution(brown, yellow) {
-    var answer = [];
-    let measure = [];
-    for (let i = 0; i <= yellow; i++){
-        if (!Number.isInteger(yellow / i)) {
-            continue;
-        }
-        const n = yellow / i;
-        const width = n + 2;
-        const height = i + 2;
-
-        if (i * 2 + width * 2 === brown) {
-            return [width, height];
-        }
+    let [width, height] = [0, 0];
+    while(width >= height) {
+      // 노란색은 (width - 2) * (height - 2) 개수랑 동일하므로 
+      let y = (width - 2) * (height - 2);
+      // 갈색은 width * height 한 결과에 -y를 해주면 된다.
+      let b = width * height - y;
+      if(y === yellow && b === brown) break;
+      if(y < yellow && b >= brown) {
+        width--;
+        height++;
+      }else width++;
     }
-    // let index = 1;
-    // while (index <= (brown + yellow)) {
-    //     if ((brown + yellow) % index == 0) {
-    //         measure.push(index);
-    //     }
-    //     index += 1;
-    // }
-    // let x = measure[((measure.length / 2) - 1) + 1];
-    // let y = measure[((measure.length / 2) - 1)];
-    // if (measure.length % 2 === 0) {
-    //     if ((x - 2)*(y - 2) === yellow) {
-    //         answer.push(measure[((measure.length / 2) - 1) + 2]);     
-    //         answer.push(measure[((measure.length / 2) - 1) - 1]);     
-    //     }else {
-    //         answer.push(x);
-    //         answer.push(y);   
-    //     }
-    // } else {
-    //     answer.push(x);
-    //     answer.push(y);
-    // }
-    // return answer;
-}
-
-// 48 => 1 2 3 4 6 8 12 16 24 48
-
-console.log(solution(10, 2)); // [4, 3]
-console.log(solution(8, 1)); // [3, 3]
-console.log(solution(24, 24)); // [8, 6]
-console.log(solution(16, 8)); // [6, 4]
-
-// [4, 2]
-
-// 1, 2, 3, 4, 6, 8, 12, 24
+    return [width, height];
+  }
+  
+  console.log(solution(10, 2)); // result => [4, 3]
+  // console.log(solution(8, 1)); // result => [3, 3]
+  // console.log(solution(24, 24)); // result => [24, 24]
