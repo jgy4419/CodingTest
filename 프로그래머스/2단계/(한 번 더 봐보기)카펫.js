@@ -11,9 +11,11 @@ function solution(brown, yellow) {
       // 갈색은 width * height 한 결과에 -y를 해주면 된다.
       let b = width * height - y;
       if(y === yellow && b === brown) break;
+      // 가로가 계속 늘어가 입력받은 brown 값이 나오거나 커지게 되면 그때부터 가로 값 하나씩 줄이고 세로 늘리기.
       if(y < yellow && b >= brown) {
         width--;
         height++;
+        // y 값과 b값이 둘 다 작으면 가로를 계속 늘리기.
       }else width++;
     }
     return [width, height];
@@ -21,4 +23,4 @@ function solution(brown, yellow) {
   
   console.log(solution(10, 2)); // result => [4, 3]
   // console.log(solution(8, 1)); // result => [3, 3]
-  // console.log(solution(24, 24)); // result => [24, 24]
+  // console.log(solution(24, 24)); // result => [24, 24]   
