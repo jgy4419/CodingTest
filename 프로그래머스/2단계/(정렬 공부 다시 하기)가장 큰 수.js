@@ -3,9 +3,12 @@ function solution(numbers) {
     for(let number of numbers){
         number_list.push(number.toString());
     }
-    number_list.sort((a, b) => (b + a) - (a + b));
+    let resSort = number_list.sort((a, b) => {
+        console.log((b + a), (a + b));
+        return (b+a) - (a+b);
+    });
 
-    return number_list.join("")[0] === '0' ? "0" : number_list.join("");
+    return resSort.join("")[0] === '0' ? "0" : number_list.join("");
 }
 
 console.log(solution([6, 10, 2]));
