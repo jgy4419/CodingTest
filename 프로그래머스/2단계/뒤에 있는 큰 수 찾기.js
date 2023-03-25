@@ -6,18 +6,21 @@
 
 function solution(numbers) {
     var answer = Array(numbers.length).fill(-1);
-    const stack = [0];
-    for(let i = 1; i < numbers.length; i++) {
+    const stack = [];
+    for(let i = 0; i < numbers.length; i++) {
         // while(stack && numbers[stack.at(-1)] < numbers[i]) {
         // stack이 존재하고, 존재하는 인덱스 순서의 숫자가 현재 수 보다 낮을 경우
         while(stack && numbers[stack[stack.length - 1]] < numbers[i]) {
-            console.log('if', stack);
             // answer의 인덱스 위치에 돌아온 수를 넣어준다.
+            // 같은 값이 나오면 계속 pop 해주면서 answer 배열에 값이 채워진다. 우선 뒤에부터 하나씩 값이 채워짐.
+            console.log('pop', numbers[i]);
             answer[stack.pop()] = numbers[i];
+            console.log('answer', answer);
         }
-        console.log('else', stack);
+        // 값이 같은 경우 계속 stack에 i 증가. (후에 큰 값이 나오면 pop으로 인해 값이 채워짐.)
         // 현재 인덱스 넣어주기.
         stack.push(i);
+        console.log('else', stack);
     }
     return answer;
 }
