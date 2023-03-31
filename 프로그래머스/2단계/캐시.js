@@ -26,10 +26,13 @@ function solution(cacheSize, cities) {
     while(cities.length) {
         let city = cities.shift().toLowerCase();
         if (cache.includes(city)) {
+            // 포함되어져 있으면 해당 인덱스를 찾아서 제거.
             cache.splice(cache.indexOf(city), 1);
+            // 그리고 새로 들어올 city 값 추가개주기.
             cache.push(city);
-            answer += 1;
+            answer += 1; // 포함되어져 있으면 answer에 + 1 해줌.
         } else {
+            // 포함이 안되어 있고, cache의 길이랑 cache사이즈
             if(cache.length === cacheSize) {
                 cache.shift();
             }
