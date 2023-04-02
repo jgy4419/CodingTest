@@ -24,7 +24,7 @@ function solution(cacheSize, cities) {
     let cache = [];
 
     while(cities.length) {
-        let city = cities.shift().toLowerCase();
+        let city = cities.shift().toLowerCase();    
         if (cache.includes(city)) {
             // 포함되어져 있으면 해당 인덱스를 찾아서 제거.
             cache.splice(cache.indexOf(city), 1);
