@@ -1,18 +1,41 @@
-function whoisThis(){
-  console.log(this);
+// 투포인터 알고리즘
+
+// 투포인터 알고이즘 적용 x (시간 복잡도 O(N^2), 공간복잡도 1)
+// function solution(arr){
+//   for(let i = 0; i < arr.length; i++) {
+//     for(let j = 0; j < arr.length; j++) {
+//       if(arr[i] + arr[j] === 0) {
+//         return [arr[i], arr[j]];
+//       }
+//     }
+//   }
+// }
+
+// 투포인터 적용
+function solution(arr) {
+  let left = 0;
+  let right = arr.length - 1;
+  
+  // 포인터가 같은 곳을 가리키거나 서로 교차되면 값을 못찾았으므로 loop 종료.
+  while(left < right) {
+    let sum = arr[left] + arr[right];
+    if(sum === 0) {
+      return [arr[left], arr[right]];
+    } else if(sum > 0) {
+      right--;
+    }else {
+      left++;
+    }
+  }
+  // 못 찾으면 기본 default 값으로 undefined가 출력된다.
 }
 
-whoisThis();
+// 출력 예시
+console.log(solution([-4, -3, -2, -1, 0, 1, 2, 5])); // result -> [-2, 2]
+console.log(solution([-3, -2, -1, 0, 1, 2, 3]));// [-3, 3]
+console.log(solution([-2, 0, 1, 3]));// undefined
+console.log(solution([1, 2, 3]));// undefined
 
-var obc = {
-  x: 123
-};
-
-whoisThis.apply(obc)
-
-
-
-  
 // function solution(wallpaper) {
 //     var answer = [];
 //     const graph = [];
