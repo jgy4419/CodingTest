@@ -1,0 +1,37 @@
+.modal__container {
+    position: relative;
+    width: 30vw;
+    height: 100vh;
+    border: 1px solid #333;
+}
+.modal__ul {
+    display: flex;
+    justify-content: space-around;
+}
+.menu {
+    display: flex;
+    align-items: center;
+    min-height: 50px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #333;
+    cursor: pointer;
+}
+
+.list__ul {
+    width: 100%;
+    text-align: center;
+}
+.list__li {
+    margin-top: 30px;
+    padding: 20px;
+    box-sizing: content-box;
+    font-size: 20px;
+    font-weight: 600;
+    cursor: move;
+    transition: .5s;
+}
+
+.list__li:hover {
+    background-color: #f1f1f1;
+}
