@@ -1,4 +1,4 @@
-import {textMove} from '../item/text.js';
+import {itemMove} from '../edit/editMain.js';
 
 class List extends HTMLElement {
     connectedCallback() {
@@ -19,11 +19,12 @@ class List extends HTMLElement {
 customElements.define('list-component', List);
 
 document.querySelectorAll('.list__li').forEach(item => {
+    let count = 0;
     item.addEventListener('click', (e) => {
         e.preventDefault();
         const text = e.target.innerText;
         const style = e.target.localName;
-        console.log(e);
-        textMove(text, style);
+        itemMove(text, style, count);
+        count++;
     })
 });

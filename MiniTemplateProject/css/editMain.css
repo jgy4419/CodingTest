@@ -1,0 +1,14 @@
+.index__container {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    width: 100vw;
+    height: 100vh;
+}
+.editmain__contain{
+    width: 70vw;
+    height: 100vh;
+}
+.moveText{
+    position: relative;
+}
