@@ -4,25 +4,16 @@ class EditMain extends HTMLElement {
             <div class="index__container">
                 <modal-component></modal-component>
                 <div class="editmain__contain">
-                    EditMain
                 </div>
             </div>
         `;
     }
-    // itemMove(text, style, element) {
-    //     const editComponent = document.querySelector('.editmain__contain');
-    //     let newElement = document.createElement(style);
-    //     editComponent.appendChild(newElement);
-    //     console.log(element);        
-    // }
 }
 customElements.define('edit-main', EditMain);
 
 
 function itemMove(text, style, count){
     // editmain__contain 클래스에 element 생성.
-    // moveText = document.querySelectorAll('.moveText');
-    // console.log(moveText);
     const editComponent = document.querySelector('.editmain__contain');
     const newElement = document.createElement(style);
     newElement.className = 'moveText'
@@ -33,17 +24,20 @@ function itemMove(text, style, count){
     console.log(newElement);
     moveTextFunc();
 }
-
+let moveText = document.querySelectorAll('.moveText');
 function moveTextFunc() {
-    let moveText = document.querySelectorAll('.moveText');
-    // console.log('??');
-    if(moveText.length > 1) {
+    moveText = document.querySelectorAll('.moveText');
+    console.log(moveText.length);
+    // if(moveText.length >= 1) {
         console.log('?');
         moveText.forEach((element, index) => {
-            element.addEventListener('mousedown', mouseDown, false);
-            position = index;
+            // 클릭한 element 요소를 event 인자로 넣어주기..
+            // position = index; // 마우스 움직일 때 index 값 변경 시켜줘야됨.
+            // element.style.zIndex = -1;
+            element.addEventListener('mousedown', mouseDown);
+            console.log(element);
         });
-    }
+    // }
 }
 
 let posX = 0,
@@ -54,12 +48,16 @@ let posX = 0,
 let position = 0;
 
 const mouseDown = (e) => {
-    e.preventDefault();
+    // e.preventDefault();
+    // 클릭한 element가 들어오지 않는다..
+    // alert(position);
+    console.log(position);
     console.log(e);
     posX = e.clientX - e.offsetX;
     posY = e.clientY - e.offsetY;
+    // 다듬기
+    position = [...moveText].indexOf(e.target) + 1;
     window.addEventListener('mousemove', moveElement, false);
-    console.log(e);
 }
 
 const mouseUp = () => {
@@ -71,13 +69,17 @@ window.addEventListener('mouseup', mouseUp, false);
 const moveElement = (e) => {
     console.log(e);
     console.log(e.target);
+    console.log(e.target.childNodes);
     console.log(e.target.childNodes[position]);
-    mouseX = e.clientX - posX;
+    // alert(position);
+    mouseX = e.clientX - posX - 100;
     mouseY = e.clientY - posY;
     console.log(mouseX, mouseY);
+    // alert(e.srcElement);
     e.target.childNodes[position].style.left = mouseX + 'px';
-    console.log('left', e.target.childNodes[position].style);
     e.target.childNodes[position].style.top = mouseY + 'px';
+    // e.srcElement.style.left = mouseX + 'px';
+    // e.srcElement.style.top = mouseY + 'px';
 }
 
 export {itemMove};
