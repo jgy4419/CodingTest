@@ -8,12 +8,3 @@ class Text extends HTMLElement {
     }
 }
 customElements.define('text-item', Text);
-
-// function textMove(text, style, element){
-    
-//     // 이어서 작업하기
-//     let newElement = document.createElement(style);
-//     console.log(element);
-// }
-
-// export {textMove};
