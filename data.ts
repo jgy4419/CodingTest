@@ -1,42 +1,90 @@
-// interface 함수(메서드, 속성) 선언 부분 다시 보기, 타입 서술어 다시보기!
+import {Func} from './data.d';
 
-type Result<Data> = FailureResult | SuccessfulResult<Data>;
-
-interface FailureResult {
-	error: Error,
-	successed: false
-}
-
-interface SuccessfulResult<Data> {
-	data: Data,
-	successed: true
-}
-
-function handleResult(result: Result<string>) {
-	if(result.successed) {
-		console.log('We did it!');
-	} else {
-		console.error(`Awww... ${result.error}`);
+const func: Func = (x, y) => {
+	// if(x instanceof 'string') {
+	if(typeof x === 'string') {
+		return true;
+	}else {
+		return false;
 	}
 }
 
-function get<T, Key extends keyof T>(container: T, key: Key) {
-	return container[key];
+let func2: Func = function(a, b) {
+	if(typeof a === 'string') {
+		return true
+	} else {
+		return false;
+	}
 }
 
-const roles = {
-	favorite: "Fargo",
-	others: ["Almost Famous", "Bure After Reading", "Nomadland"]
+func2(1, '21');
+
+func(234, '23');
+
+// 클래스 타입
+interface ICat {
+	name: string
+}
+
+interface ICatConstructor {
+	new (name: string): ICat
+}
+
+class Cat implements ICat {
+	constructor(public name: string) {
+		this.name = name;
+	}
+}
+
+function makeKitten(c: ICatConstructor, n: string) {
+	return new c(n);
+}
+
+const kitten = makeKitten(Cat, 'Lucy');
+console.log(kitten);
+
+
+interface IUser {
+	[itemIndex: string]: string | boolean | number;
+}
+
+let user: IUser = {
+	name: 'jgy',
+	email: 'jg_9@naver.com',
+	isValid: true,
+	0: false
+}
+
+interface ICountries {
+	KR: '대한민국',
+	US: '미국',
+	CP: '중국'
+}
+
+function toArray<T>(a: T, b: number): (T | number)[] {
+	return [a, b];
+}
+
+toArray<string>('jgy', 26);
+
+interface MyType<T extends string | number> {
+	name: string,
+	value: T
+}
+
+const dataA: MyType<string> = {
+	name: 'Data A',
+	value: 'Hello world'
+}
+
+interface IIUser { 
+	name: string,
+	age: number
 };
 
-const favorite = get(roles, "favorite");
-const others = get(roles, "others");
-
-async function lengthAfterSecond(text: string) {
-	await new Promise(resolve => setTimeout(resolve, 1000));
-	return text.length;
+let user2: IIUser = {
+	name: 'jgy',
+	age: 26
 }
 
-async function lengthImmediately(text: string) {
-	return text.length;
-}
+user2.name = 'mjh';
