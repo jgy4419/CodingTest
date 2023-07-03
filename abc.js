@@ -12,29 +12,29 @@
 // }
 
 // 투포인터 적용
-function solution(arr) {
-  let left = 0;
-  let right = arr.length - 1;
+// function solution(arr) {
+//   let left = 0;
+//   let right = arr.length - 1;
   
-  // 포인터가 같은 곳을 가리키거나 서로 교차되면 값을 못찾았으므로 loop 종료.
-  while(left < right) {
-    let sum = arr[left] + arr[right];
-    if(sum === 0) {
-      return [arr[left], arr[right]];
-    } else if(sum > 0) {
-      right--;
-    }else {
-      left++;
-    }
-  }
-  // 못 찾으면 기본 default 값으로 undefined가 출력된다.
-}
+//   // 포인터가 같은 곳을 가리키거나 서로 교차되면 값을 못찾았으므로 loop 종료.
+//   while(left < right) {
+//     let sum = arr[left] + arr[right];
+//     if(sum === 0) {
+//       return [arr[left], arr[right]];
+//     } else if(sum > 0) {
+//       right--;
+//     }else {
+//       left++;
+//     }
+//   }
+//   // 못 찾으면 기본 default 값으로 undefined가 출력된다.
+// }
 
-// 출력 예시
-console.log(solution([-4, -3, -2, -1, 0, 1, 2, 5])); // result -> [-2, 2]
-console.log(solution([-3, -2, -1, 0, 1, 2, 3]));// [-3, 3]
-console.log(solution([-2, 0, 1, 3]));// undefined
-console.log(solution([1, 2, 3]));// undefined
+// // 출력 예시
+// console.log(solution([-4, -3, -2, -1, 0, 1, 2, 5])); // result -> [-2, 2]
+// console.log(solution([-3, -2, -1, 0, 1, 2, 3]));// [-3, 3]
+// console.log(solution([-2, 0, 1, 3]));// undefined
+// console.log(solution([1, 2, 3]));// undefined
 
 // function solution(wallpaper) {
 //     var answer = [];
@@ -250,3 +250,8 @@ console.log(solution([1, 2, 3]));// undefined
 // ]);
 
 // console.log( JSON.stringify(tree, undefined, 2) )
+
+
+let calc = '+';
+
+console.log(`${3} ${calc} ${6}`);

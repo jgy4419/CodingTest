@@ -1,22 +1,141 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<html>
+    <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/global.css">
-    <link rel="stylesheet" href="./css/menu.css">
-    <link rel="stylesheet" href="./css/editMain.css">
-    <script src="./js/controller/itemMove.js" type="module"></script>
-    <script src="./js/view/menu/modal.js" type="module"></script>
-    <script src="./js/view/menu/list.js" type="module"></script>
-    <script src="./js/view/item/text.js" type="module"></script>
-    <script src="./js/view/edit/editMain.js" type="module"></script>
-    <script src="./js/controller/drageFuncs.js" defer type="module"></script>
-    <script src="./js/controller/listClick.js" type="module"></script>
-    <title>Document</title>
-</head>
-<body>
-    <edit-main/>
-</body>
+    <link rel="stylesheet" href="styles.css">
+    <title>Drawing app</title>
+    </head>
+
+    <body>
+    <section class="container">
+        <div id="toolbar">
+            <label for="stroke">Stroke</label>
+            <input id="stroke" name='stroke' type="color">
+            <label for="lineWidth">Line Width</label>
+            <input id="lineWidth" name='lineWidth' type="number" value="5">
+            <button id="clear">Clear</button>
+        </div>
+        <div class="drawing-board">
+            <canvas id="drawing-board"></canvas>
+        </div>
+    </section>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow: hidden;
+            color: white;
+        }
+
+        .container {
+            height: 100%;
+            display: flex;
+        }
+
+        #toolbar {
+            display: flex;
+            flex-direction: column;
+            width: 100px;
+            background-color: black;
+        }
+
+        #toolbar * {
+            margin-bottom: 5px;
+        }
+
+        #toolbar input {
+            width: 100%;
+        }
+    </style>
+    <script>
+        const canvas = document.getElementById('drawing-board');
+        const toolbar = document.getElementById('toolbar');
+        const ctx = canvas.getContext('2d');
+
+        const canvasOffsetX = canvas.offsetLeft;
+        const canvasOffsetY = canvas.offsetTop;
+
+        let [mouseDownX, mouseDownY, mouseUpX, mouseUpY] = [0, 0, 0, 0];
+
+        canvas.width = window.innerWidth - canvasOffsetX;
+        canvas.height = window.innerHeight - canvasOffsetY;
+
+        let isPainting = false;
+        let lineWidth = 5;
+
+        toolbar.addEventListener('click', (event) => {
+            if (event.target.id === 'clear') {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+            }
+            });
+
+            toolbar.addEventListener('change', (event) => {
+            if (event.target.id === 'stroke') {
+                ctx.strokeStyle = event.target.value;
+            }
+
+            if (event.target.id === 'lineWidth') {
+                lineWidth = event.target.value;
+            }
+        });
+
+        canvas.addEventListener('mousedown', (event) => {
+            isPainting = true;
+
+            console.log(event);
+
+            mouseDownX = event.offsetX;
+            mouseDownY = event.offsetY;
+
+            ctx.beginPath();
+                ctx.moveTo(event.clientX - canvasOffsetX, event.clientY);
+            });
+
+            canvas.addEventListener('mouseup', (event) => {
+                isPainting = false;
+                console.log(event);
+                mouseUpX = event.offsetX;
+                mouseUpY = event.offsetY;
+
+                changedImage();
+            });
+
+            canvas.addEventListener('mousemove', (event) => {
+            if (!isPainting) {
+                return;
+            }
+
+            ctx.lineWidth = lineWidth;
+            ctx.lineCap = 'round';
+
+             ctx.lineTo(event.clientX - canvasOffsetX, event.clientY);
+            ctx.stroke();
+        });
+
+        function changedImage() {
+            const canvas = document.getElementById('drawing-board');
+            const captureImage = document.querySelector('.drawing-board');
+            const ctx = canvas.getContext("2d");
+
+            const canvasElement = document.createElement('canvas');
+
+            canvasElement.style.marginLeft = `${mouseDownX}px`;
+            canvasElement.style.marginTop = `${mouseDownY}px`;
+            canvasElement.width = mouseUpX;
+            canvasElement.height = mouseUpY;
+            console.log(canvasElement);
+            canvasElement.getContext("2d").fillStyle = 'green';
+            canvasElement.getContext("2d").fillRect(mouseDownX, mouseDownY, mouseDownX, mouseDownY)
+            canvas.appendChild(canvasElement);
+
+            console.log(canvas.children);
+
+            console.log('change', canvas.children[canvas.children.length  - 1].toDataURL());
+            // for(let i = 0; i < canvas.children.length; i++) {
+            //     canvas.children[i].getContext("2d").fillStyle = "green";
+            //     canvas.children[i].getContext("2d").fillRect(mouseDownX, mouseDownY, mouseDownX, mouseDownY);
+            // }
+        }
+    </script>
+    </body>
 </html>
