@@ -64,19 +64,43 @@
         - 뺄셈 연산자를 기준으로 최대한 많은 수를 묶는다.
 */
 
-function solution(calculation) {
-    let answer = 0;
-    // 뺄셈 연산자를 기준으로 나누어 여러 그룹 만들기
-    let groups = calculation.split("-");
-    for(let i = 0; i < groups.length; i++) {
-        // 각 그룹 내부에서 덧셈(+) 연신 적용.
-        let cur = groups[i].split("+").reduce((a, b) => Number(a) + Number(b));
-        if(i == 0) answer += cur; // 첫 번째 그룹은 항상 덧셈 (+)
-        else answer -= cur; // 두 번째 그룹부터 뺄셈 (-)
-    }
+// function solution(calculation) {
+//     let answer = 0;
+//     // 뺄셈 연산자를 기준으로 나누어 여러 그룹 만들기
+//     let groups = calculation.split("-");
+//     for(let i = 0; i < groups.length; i++) {
+//         // 각 그룹 내부에서 덧셈(+) 연신 적용.
+//         let cur = groups[i].split("+").reduce((a, b) => Number(a) + Number(b));
+//         if(i == 0) answer += cur; // 첫 번째 그룹은 항상 덧셈 (+)
+//         else answer -= cur; // 두 번째 그룹부터 뺄셈 (-)
+//     }
 
-    return answer;
+//     return answer;
+// }
+
+// console.log(solution("55-50+40")); // -35
+// console.log(solution("90+30-20+50-30+60-70+30+20")); // -160
+
+
+// 설탕 배달
+// 상든이가 배달하는 봉지의 최소 개수를 출력하기. 만약, 정확하게 N킬로그램을 만들 수 없다면 -1 출력.
+// 봉지는 3kg, 5kg 두 가지가 있다.
+function solution(n) {
+    let cnt = 0;
+    let flag = false;
+
+    // 더 이상 반복할 수 없을 때까지 반복
+    while(n >= 0) {
+        if(n == 0 || n % 5 == 0) {
+            cnt += parseInt(n / 5);
+            flag = true;
+            break;
+        }
+        n -= 3;
+        cnt += 1;
+    }
+    return flag === false ? -1 : cnt;
 }
 
-console.log(solution("55-50+40")); // -35
-console.log(solution("90+30-20+50-30+60-70+30+20")); // -160
+console.log(solution(18)); // 4
+console.log(solution(4)); // -1
