@@ -1,3 +1,53 @@
+class User {
+    constructor(name) {
+        this.name = name;
+    }
+
+    get name() {
+        console.log('geeeet!', this._name);
+        return this._name;
+    }
+
+    set name(value) {
+        if(value.length < 4) console.log('이름이 너무 짧아요.');
+        this._name = value;
+    }
+}
+
+
+let userName = new User('규영').name;
+console.log(userName);
+
+// let Animal = function() {
+
+// }
+
+// Animal.prototype.move = function() {
+//     console.log('동물이 움직여요.');
+//     return 'move animal';
+// }
+
+// let Cat = function() {
+//     // Animal.apply(this, arguments);
+//     User.apply(this, arguments);
+// }
+
+// // 프로토타입 상속 방법.
+// // Cat.prototype = Object.create(Animal.prototype);
+// // Cat.prototype.constructor = Cat;
+
+// Cat.prototype = Object.create(User.prototype);
+// Cat.prototype.constructor = Cat;
+
+// console.log(new Animal().move);
+// console.log(new Cat().move()); // 동물이 움직여요.
+
+// const userName = new User('규영');
+// console.log(userName);
+
+
+
+
 // 투포인터 알고리즘
 
 // 투포인터 알고이즘 적용 x (시간 복잡도 O(N^2), 공간복잡도 1)
@@ -251,7 +301,3 @@
 
 // console.log( JSON.stringify(tree, undefined, 2) )
 
-
-let calc = '+';
-
-console.log(`${3} ${calc} ${6}`);

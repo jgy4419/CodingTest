@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+    <h2>Draw quadratic bezier (relative commands)</h2>
+<p><button type="button" id="clear" onclick="clearDrawing()">Clear</button>
+  <label>Get nth Mouse position</label><input type="number" id="nthMouseCoord" value="1" min="0" oninput="changeVal()">
+  <label>Smooth</label><input type="number" id="simplifyDrawing" min="0" value="2" oninput="changeVal()">
+</p>
+<div class="flex">
+  <svg class="border" id="svg" viewBox="0 0 200 100">
+</svg>
+  <textarea class="border" id="svgMarkup"></textarea>
+</div>
+<script>
+  // javascript
+const svg = document.getElementById("svg");
+const svgns = "http://www.w3.org/2000/svg";
+let strokeWidth = 0.25;
+// rounding and smoothing
+let decimals = 2;
+
+let getNthMouseCoord = 1;
+let smooth = 2;
+
+// init
+let isDrawing = false;
+var points = [];
+let path = "";
+let pointCount = 0;
+
+let bodyElement = document.querySelector('body');
+
+const drawStart = (e) => {
+  console.log(e);
+  pointCount = 0;
+  isDrawing = true;
+  // create new path
+  path = document.createElementNS(svgns, "path");
+  if(isDrawing === true) bodyElement.addEventListener("pointermove", draw);
+  svg.appendChild(path);
+};
+
+const draw = (e) => {
+  e.stopPropagation();
+  if (isDrawing) {
+    svg.addEventListener("pointerover", draw);
+    console.log(e.target.tagName);
+  // svg.addEventListener("pointerout", draw);`
+    drawOver(e.type, e.target.tagName);
+    // 그리는 중에 mouseover가 되면
+    pointCount++; 
+    if (getNthMouseCoord && pointCount % getNthMouseCoord === 0) {
+      let point = getMouseOrTouchPos(e);
+      // save to point array
+      points.push(point);
+    }
+    if (points.length > 1) {
+      let d = smoothQuadratic(points, smooth, decimals);
+      path.setAttribute("d", d);
+    }
+  }
+};
+
+const drawOver = (eventType, tagName) => {
+  let moveState = false;
+  console.log(tagName);
+  // if(eventType === 'pointermove') moveState = true;
+  
+  console.log(eventType, isDrawing);
+
+  // if(eventType === 'pointerout') {
+  //   isDrawing = false;
+  // }else if(eventType === 'pointerover'){
+  //   isDrawing = true;
+  // }
+  // move(그리면서) 하면서 계속 체크..? 해줌 over 시 
+  // if(isDrawing === true && eventType === 'pointerover') isDrawing = false;
+}
+
+const drawEnd = (e) => {
+  isDrawing = false;
+  points = [];
+  // just illustrating the ouput
+  svgMarkup.value = svg.outerHTML;
+};
+
+bodyElement.addEventListener("pointerdown", drawStart);
+// svg.addEventListener("pointermove", draw);
+bodyElement.addEventListener("pointerup", drawEnd);
+// svg.addEventListener("pointerover", draw);
+// svg.addEventListener("pointerout", draw);
+// svg.addEventListener("pointercancel", draw);
+// start drawing: create new path;
+// svg.addEventListener("touchstart", drawStart);
+// svg.addEventListener("touchmove", draw);
+
+// // stop drawing, reset point array for next line
+// svg.addEventListener("touchend", drawEnd);
+// svg.addEventListener("touchcancel", drawEnd);
+
+function smoothQuadratic(points, skip = 0, decimals = 3) {
+  let pointsL = points.length;
+  let even = pointsL - skip - (1 % 2) === 0;
+
+
+  // set M/starting point
+  let type = "M";
+  let values = [points[0].x, points[0].y];
+  let [Mx, My] = values.map((val) => {
+    return +val.toFixed(decimals);
+  });
+  let dRel = `${type}${Mx} ${My}`;
+  // offsets for relative commands
+  let xO = Mx;
+  let yO = My;
+
+  // split 1st line segment
+  let [x1, y1] = [points[1].x, points[1].y];
+  let [xM, yM] = [(Mx + x1) / 2, (My + y1) / 2];
+  let [xMR, yMR] = [xM - xO, yM - yO].map((val) => {
+    return +val.toFixed(decimals);
+  });
+  dRel += `l${xMR} ${yMR}`;
+  xO += xMR;
+  yO += yMR;
+
+  for (let i = 1; i < points.length; i += 1 + skip) {
+    // control point
+    let [x, y] = [points[i].x, points[i].y];
+    let [xR, yR] = [x - xO, y - yO];
+
+    // next point
+    let [xN, yN] = points[i + 1 + skip] ?
+      [points[i + 1 + skip].x, points[i + 1 + skip].y] :
+      [points[pointsL - 1].x, points[pointsL - 1].y];
+    let [xNR, yNR] = [xN - xO, yN - yO];
+
+    // mid point
+    let [xM, yM] = [(x + xN) / 2, (y + yN) / 2];
+    let [xMR, yMR] = [(xR + xNR) / 2, (yR + yNR) / 2];
+
+    type = "q";
+    values = [xR, yR, xMR, yMR];
+    // switch to t command
+    if (i > 1) {
+      type = "t";
+      values = [xMR, yMR];
+    }
+    dRel += `${type}${values
+      .map((val) => {
+        return +val.toFixed(decimals);
+      })
+      .join(" ")} `;
+    xO += xMR;
+    yO += yMR;
+  }
+
+  // add last line if odd number of segments
+  if (!even) {
+    values = [points[pointsL - 1].x - xO, points[pointsL - 1].y - yO];
+    dRel += `l${values
+      .map((val) => {
+        return +val.toFixed(decimals);
+      })
+      .join(" ")}`;
+  }
+  return dRel;
+}
+
+/**
+ * based on:
+ * @Daniel Lavedonio de Lima
+ * https://stackoverflow.com/a/61732450/3355076
+ */
+function getMouseOrTouchPos(e) {
+  console.log(e.type);
+  let x, y;
+  if (
+    e.type == "pointerdown" ||
+    e.type == "pointerup" ||
+    e.type == "pointermove" ||
+    e.type == "pointerover" ||
+    e.type == "pointerout" ||
+    e.type == "pointerenter" ||
+    e.type == "pointerleave"
+  ) {
+    x = e.clientX;
+    y = e.clientY;
+  }
+
+  // get svg user space coordinates
+  let point = svg.createSVGPoint();
+  point.x = x;
+  point.y = y;
+  let ctm = svg.getScreenCTM().inverse();
+  point = point.matrixTransform(ctm);
+  return point;
+}
+
+  function changeVal() {
+    getNthMouseCoord = +nthMouseCoord.value + 1;
+    simplify = +simplifyDrawing.value;;
+  }
+
+  function clearDrawing() {
+    let paths = svg.querySelectorAll('path');
+    paths.forEach(path => {
+      path.remove();
+    })
+  }
+</script>
+<style>
+body {
+  margin: 0;
+  font-family: sans-serif;
+  padding: 1em;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+svg {
+  width: 100%;
+  max-height: 75vh;
+  overflow: visible;
+}
+
+textarea {
+  width: 100%;
+  min-height: 50vh;
+  resize: none;
+}
+
+.border {
+  border: 1px solid #ccc;
+}
+
+path {
+  fill: none;
+  stroke: #000;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+input[type="number"] {
+  width: 3em;
+}
+
+input[type="number"]::-webkit-inner-spin-button {
+  opacity: 1;
+}
+
+@media (min-width: 720px) {
+  svg {
+    width: 75%;
+  }
+  textarea {
+    width: 25%;
+  }
+  .flex {
+    display: flex;
+    gap: 1em;
+  }
+  .flex * {
+    flex: 1 0 auto;
+  }
+}
+</style>
+</html>

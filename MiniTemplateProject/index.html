@@ -1,224 +1,63 @@
+<!DOCTYPE html>
 <html>
-    <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+<head>
+  <title>SVG Drawing App with Brush</title>
 </head>
 <body>
-    <edit-main/>
-</body>
-    <link rel="stylesheet" href="styles.css">
-    <title>Drawing app</title>
-    </head>
+  <svg id="drawing-board" width="800" height="600" style="border: 1px solid black;"></svg>
+  <script>
+    const svg = document.getElementById('drawing-board');
+    const brushPath = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+    let isDrawing = false;
+    let points = [];
+    svg.addEventListener('mousedown', startDrawing);
+    svg.addEventListener('mousemove', draw);
+    svg.addEventListener('mouseup', endDrawing);
+    svg.addEventListener('mouseleave', endDrawing);
 
-    <body>
-    <section class="container">
-        <div id="toolbar">
-            <label for="stroke">Stroke</label>
-            <input id="stroke" name='stroke' type="color">
-            <label for="lineWidth">Line Width</label>
-            <input id="lineWidth" name='lineWidth' type="number" value="5">
-            <button id="clear">Clear</button>
-            img
-        </div>
-        <div class="drawing-board">
-            <!-- <div class="test">asdasd</div> -->
-            <canvas id="drawing-board"></canvas>
-            <!-- <img class="tett" src="data:image/jpeg;base64,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" alt="">
-             <p>test</p> -->
-        </div>
-    </section>
-    <canvas id="drawing-board2"></canvas>
-    <style>
-        canvas {
-            /* width: 300px;
-            height: 300px; */
-            border: 1px solid #333;
-        }
-        .tett { 
-            z-index: 100;
-            position: absolute;
-            /* inset: 50px; */
-        }
-        p {
-            z-index: 10;
-            color: #000;
-            /* top: 600px;
-            right: 60%; */
-            /* inset: 50px; */
-            position: absolute;
-            background-color: #333;
-        }
-        #drawing-board {
-            position: absolute;
-            z-index: 100;
-        }
-        .test {
-            position: absolute;
-            margin: 10%;
-            color: red;
-        }
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            /* overflow: hidden; */
-            color: white;
-        }
-
-        .container {
-            height: 100%;
-            display: flex;
-        }
-
-        #toolbar {
-            display: flex;
-            flex-direction: column;
-            width: 100px;
-            background-color: black;
-        }
-
-        #toolbar * {
-            margin-bottom: 5px;
-        }
-
-        #toolbar input {
-            width: 100%;
-        }
-    </style>
-    <script>
-        const canvas = document.getElementById('drawing-board');
-        const toolbar = document.getElementById('toolbar');
-        const ctx = canvas.getContext('2d');
-        let canvas2 = document.getElementById('drawing-board2');
-        let ctx2 = canvas2.getContext("2d");
-
-        const canvasOffsetX = canvas.offsetLeft;
-        const canvasOffsetY = canvas.offsetTop;
-
-        // let [mouseDownX, mouseDownY, mouseUpX, mouseUpY] = [0, 0, 0, 0];
-        let x = [0, 0];
-        let y = [0, 0];
-
-        canvas.width = window.innerWidth - canvasOffsetX;
-        canvas.height = window.innerHeight - canvasOffsetY;
-
-        let isPainting = false;
-        let lineWidth = 5;
-
-        toolbar.addEventListener('click', (event) => {
-            if (event.target.id === 'clear') {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-            }
-            });
-
-            toolbar.addEventListener('change', (event) => {
-            if (event.target.id === 'stroke') {
-                ctx.strokeStyle = event.target.value;
-            }
-
-            if (event.target.id === 'lineWidth') {
-                lineWidth = event.target.value;
-            }
-        });
-
-        // 띄워지는 부분
-        let mouseUpX = 0;
-        let mouseUpY = 0;
-        let mouseDownX = 0;
-        let mouseDownY = 0;
-        // 영역 지정
-        let moveMaxX = 0;
-        let moveMaxY = 0;
-        let moveMinX = 0;
-        let moveMinY = 0;
-        let pushOffset;
-
-        canvas.addEventListener('mousedown', (event) => {
-            isPainting = true;
-
-            mouseDownX = event.offsetX;
-            mouseDownY = event.offsetY;
-            moveMaxX = event.offsetX;
-            moveMaxY = event.offsetY;
-            moveMinX = event.offsetX;
-            moveMinY = event.offsetY;
-
-            ctx.beginPath();
-            ctx.moveTo(event.clientX - canvasOffsetX, event.clientY);
-            // console.log(mouseDownX, mouseDownY);
-        });
-
-        canvas.addEventListener('mouseup', (event) => {
-            isPainting = false;
-            console.log(event);
-            mouseUpX = event.offsetX;
-            mouseUpY = event.offsetY;
-
-            // console.log(mouseUpX, mouseUpY);
-            changedImage();
-        });
-
-        canvas.addEventListener('mousemove', (event) => {
-            if (!isPainting) {
-                return;
-            }
-
-            ctx.lineWidth = lineWidth;
-            ctx.lineCap = 'round';
-
-            ctx.lineTo(event.clientX - canvasOffsetX, event.clientY);
-            ctx.stroke();
-
-            // 요소의 크기 지정
-            if(event.offsetX > moveMaxX) moveMaxX = event.offsetX;
-            else if(event.offsetY > moveMaxY) moveMaxY = event.offsetY;
-            else if(event.offsetX < moveMinX) moveMinX = event.offsetX;
-            else if(event.offsetY < moveMinY) moveMinY = event.offsetY;
-
-            console.log(`
-                down ${mouseUpX} ${mouseUpY} 
-                move ${moveMaxX}, ${moveMaxY}
-                ${moveMinX}, ${moveMinY}
-            `);
-        });
-
-    function changedImage() {
-        const captureImage = document.querySelector('.drawing-board');
-
-        let image = new Image();
-        image.src = canvas.toDataURL();
-
-        // // canvas 크기 성공적으로 조절 완료
-        canvas2.style.display = 'none'; // display: none 으로 가려주기.
-
-        console.log(ctx2);
-
-        let testDiv = document.createElement('div');
-        testDiv.style.backgroundColor = '#333';
-        testDiv.style.width = (moveMaxX - moveMinX) + 50;
-        testDiv.style.height = (moveMaxY - moveMinY) + 50;
-        testDiv.style.marginTop = moveMinY - 20;
-        testDiv.style.marginLeft = moveMinX - 20;
-        document.querySelector('.drawing-board').appendChild(testDiv);
-
-        // canvas 크기 성공적으로 조절 완료
-        canvas2.width = (moveMaxX - moveMinX) + 50;
-        canvas2.height = (moveMaxY - moveMinY) + 50;
-
-        image.addEventListener('load', () => {
-            ctx2.drawImage(
-                image, 
-                moveMinX - 20,
-                moveMinY - 20,
-                (moveMaxX - moveMinX) + 50,
-                (moveMaxY - moveMinY) + 50,
-                0, 0,
-                (moveMaxX - moveMinX) + 50,
-                (moveMaxY - moveMinY) + 50
-            )
-            console.log(canvas2.toDataURL());
-        });
+    function startDrawing(event) {
+      isDrawing = true;
+      const point = getPoint(event);
+      points.push(point);
+      updateBrushPath();
     }
-    </script>
-    </body>
+
+    function draw(event) {
+      if (!isDrawing) return;
+      const point = getPoint(event);
+      points.push(point);
+      updateBrushPath();
+    }
+
+    function endDrawing() {
+      isDrawing = false;
+      points = [];
+    }
+
+    function updateBrushPath() {
+      if (points.length < 3) return;
+
+      const d = `M${points[0].x},${points[0].y} C${points[1].x},${points[1].y} ${points[2].x},${points[2].y}`;
+
+      for (let i = 3; i < points.length; i++) {
+        const point = points[i];
+        d += ` ${point.x},${point.y}`;
+      }
+
+      brushPath.setAttribute('d', d);
+      brushPath.setAttribute('stroke', 'black');
+      brushPath.setAttribute('fill', 'none');
+
+      svg.appendChild(brushPath);
+    }
+
+    function getPoint(event) {
+      const { clientX, clientY } = event;
+      const point = svg.createSVGPoint();
+      point.x = clientX;
+      point.y = clientY;
+      return point.matrixTransform(svg.getScreenCTM().inverse());
+    }
+  </script>
+</body>
 </html>

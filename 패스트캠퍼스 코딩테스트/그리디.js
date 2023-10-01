@@ -85,22 +85,62 @@
 // 설탕 배달
 // 상든이가 배달하는 봉지의 최소 개수를 출력하기. 만약, 정확하게 N킬로그램을 만들 수 없다면 -1 출력.
 // 봉지는 3kg, 5kg 두 가지가 있다.
-function solution(n) {
-    let cnt = 0;
-    let flag = false;
+// function solution(n) {
+//     let cnt = 0;
+//     let flag = false;
 
-    // 더 이상 반복할 수 없을 때까지 반복
-    while(n >= 0) {
-        if(n == 0 || n % 5 == 0) {
-            cnt += parseInt(n / 5);
-            flag = true;
-            break;
-        }
-        n -= 3;
-        cnt += 1;
+//     // 더 이상 반복할 수 없을 때까지 반복
+//     while(n >= 0) {
+//         if(n == 0 || n % 5 == 0) {
+//             cnt += parseInt(n / 5);
+//             flag = true;
+//             break;
+//         }
+//         n -= 3;
+//         cnt += 1;
+//     }
+//     return flag === false ? -1 : cnt;
+// }
+
+// console.log(solution(18)); // 4
+// console.log(solution(4)); // -1
+
+/* 
+    A -> B
+*/
+
+// console.log(String(162).split('')[0])
+
+// function solution(a, b) {
+//     let flag = false; // a에서 b로 이동 가능한지에 대한 여부.
+//     let result = 0;
+//     while(a <= b) {
+//         if(a == b) {
+//             flag = true;
+//             break;
+//         }
+//         if(b % 2 == 0) b = parseInt(b / 2);
+//         else if(b % 10 == 1) b = parseInt(b / 10);
+//         else break;
+//         result++;
+//     }
+//     if(flag) return result;
+//     else return -1;
+// }
+
+// console.log(solution(2, 162));
+// console.log(solution(4, 42));
+// console.log(solution(100, 40021));
+
+function solution(num) {
+    let answer = 0;
+    let sum = 0;
+    while(num >= sum) {
+        answer++;
+        sum += answer;
     }
-    return flag === false ? -1 : cnt;
-}
 
-console.log(solution(18)); // 4
-console.log(solution(4)); // -1
+    return answer - 1;
+}  
+
+console.log(solution(200)); // 19
