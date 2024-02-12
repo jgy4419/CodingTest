@@ -2,9 +2,7 @@ console.log("test2221 abc");
 console.log("test2 abc");
 class User {
     constructor(name) {
-        this.test = "테스트";
         this.name = name;
-        this.test3 = "test3";
         this.master = "master!";
     }
 
@@ -13,7 +11,6 @@ class User {
     }
 
     set name(value) {
-      console.log('test2 console 입니다.');
       console.log('master console 입니다.');
         if(value.length < 4) console.log('이름이 너무 짧아요.');
         this._name = value;
