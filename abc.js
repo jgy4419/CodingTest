@@ -1,3 +1,4 @@
+console.log("test abc");
 class User {
     constructor(name) {
         this.name = name;
