@@ -4,6 +4,7 @@ class User {
     constructor(name) {
         this.test = "테스트";
         this.name = name;
+        this.test2 = "테스트2";
     }
 
     get name() {
@@ -14,6 +15,7 @@ class User {
       console.log('test console 입니다.');
         if(value.length < 4) console.log('이름이 너무 짧아요.');
         this._name = value;
+        this.test = test;
     }
 }
 
