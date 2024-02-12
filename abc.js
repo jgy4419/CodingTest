@@ -2,12 +2,14 @@ console.log("test2221 abc");
 console.log("test2 abc");
 class User {
     constructor(name) {
+        this.test = test;
         this.name = name;
     }
 
     get name() {
-        console.log('geeeet!', this._name);
-        return this._name;
+      console.log("Test Log!");
+      console.log('geeeet!', this._name);
+      return this._name;
     }
 
     set name(value) {
