@@ -11,7 +11,7 @@ class User {
     }
 
     set name(value) {
-      console.log('master console 입니다.');
+      console.log('master commit');
         if(value.length < 4) console.log('이름이 너무 짧아요.');
         this._name = value;
         this.test = test;
