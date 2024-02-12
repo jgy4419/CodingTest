@@ -7,12 +7,11 @@ class User {
     }
 
     get name() {
-      console.log("Test Log!");
-      console.log('geeeet!', this._name);
       return this._name;
     }
 
     set name(value) {
+      console.log('test console 입니다.');
         if(value.length < 4) console.log('이름이 너무 짧아요.');
         this._name = value;
     }
