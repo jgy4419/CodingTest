@@ -18,6 +18,8 @@ class Users {
     
 }
 
+console.log("test commit");
+
 let users = new Users();
 console.log(users.findById(2));
 console.log(users.remove(2));
