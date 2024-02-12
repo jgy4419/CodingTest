@@ -2,7 +2,7 @@ console.log("test2221 abc");
 console.log("test2 abc");
 class User {
     constructor(name) {
-        this.test = test;
+        this.test = "테스트";
         this.name = name;
     }
 
@@ -20,6 +20,7 @@ class User {
 
 let userName = new User('규영').name;
 console.log(userName);
+console.log("test branch log");
 
 // let Animal = function() {
 
