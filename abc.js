@@ -1,3 +1,4 @@
+console.log("master");
 class User {
     constructor(name) {
         this.name = name;
