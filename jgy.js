@@ -1,3 +1,2 @@
 console.log("jgy");
-
-console.log("jgy2");
+console.log("git test용 jgy 로그");
