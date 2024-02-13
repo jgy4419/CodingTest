@@ -1,5 +1,4 @@
-console.log("test2221 abc");
-console.log("test2 abc");
+
 class User {
     constructor(name) {
         this.test = "테스트";
@@ -88,7 +87,7 @@ console.log("test branch log");
 //   // 못 찾으면 기본 default 값으로 undefined가 출력된다.
 // }
 
-// // 출력 예시
+// // 출력 예시 
 // console.log(solution([-4, -3, -2, -1, 0, 1, 2, 5])); // result -> [-2, 2]
 // console.log(solution([-3, -2, -1, 0, 1, 2, 3]));// [-3, 3]
 // console.log(solution([-2, 0, 1, 3]));// undefined
