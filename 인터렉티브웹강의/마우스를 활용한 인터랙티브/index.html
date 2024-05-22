@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1></h1>
+    <div class="box">
+        <img src="https://assets-global.website-files.com/61f2d964890912e7c1a01c3d/620a87623a5699bae0b23f6c_61b3bda219963cd6ac024c98_01.gif" alt="나비">
+    </div>
+</body>
+<style>
+    /* body {
+        background: #eee;
+    }
+    h1 {
+        font-size: 30px;
+        padding: 20px;
+    }
+    .box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border-radius: 50%;
+        transform: translate(-50%, -50%);
+        transition: all 0.5s ease-in-out;
+    }
+    .box img {
+        width: 160px;
+    } */
+</style>
+<script>
+    const h1Element = document.querySelector("h1");
+    const boxElement = document.querySelector(".box");
+
+    let [x, y, targetX, targetY, speed] = [0, 0, 0, 0, 0.01];
+
+    window.addEventListener("mousemove", (event) => {
+        x = event.pageX;
+        y = event.pageY;
+        boxElement.style.top = event.pageY + "px";
+        boxElement.style.left = event.pageX + "px";
+        h1Element.innerHTML = "x축 " + event.pageX + "y축 " + event.pageY;
+    });
+
+    const loop = () =>{
+        window.requestAnimationFrame(loop);
+        // targetX += x;
+        // targetY += y;
+        boxElement.style.top = x + "px";
+        boxElement.style.left = y + "px";
+    }
+
+    // loop();
+</script>
+</html>

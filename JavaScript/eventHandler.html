@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+  <div id="div">div
+    <span id="span">span
+      <button id="button">button</button>
+    </span>
+  </div>
+</body>
+  <style>
+  .warning {
+    border: 2px solid #f39389;
+    border-radius: 2px;
+    padding: 10px;
+    position: absolute;
+    background-color: #fbd8d4;
+    color: #3b3c40;
+  }
+  </style>
+  <script>
+const div = document.getElementById('div')
+const span = document.getElementById('span')
+const button = document.getElementById('button')
+
+div.addEventListener("click", () => console.log("div click"))
+span.addEventListener("click", () => console.log("span click"))
+button.addEventListener("click", (e) => {
+  // e.stopImmediatePropagation();
+  console.log("button click 1")
+});
+button.addEventListener("click", (e) => {
+  e.stopImmediatePropagation();
+  console.log("button click 2");
+})
+button.addEventListener("click", (e) => {
+  // e.stopPropagation();
+  // e.stopImmediatePropagation();
+  console.log("button click 3")
+}, {capture: true});
+  </script>
+</html>

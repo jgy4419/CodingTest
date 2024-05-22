@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="cursorItem">
+        <span class="circle"></span>
+    </div>
+    <div class="gateBox">
+        <div class="top">
+            <p>내일 출근을 해야 하나요?</p>
+        </div>
+        <div class="bottom">
+            <button>Yes</button>
+            <button>No</button>
+        </div>
+    </div>
+</body>
+<script>
+    window.onload = () => {
+        let [x, y] = [0, 0];
+        let [targetX, targetY] = [0, 0];
+
+        const speed = 0.04;
+        const cursorItem = document.querySelector(".cursorItem");
+        const circle = document.querySelector(".circle");
+        const buttons = document.querySelectorAll("button");
+
+        buttons.forEach((button) => {
+            button.addEventListener("mouseenter", (e) => {
+                circle.style.transform = "scale(0.3)";
+            })
+
+            button.addEventListener("mouseleave", () => {
+                circle.style.transform = "scale(1)";
+            });
+        });
+
+        window.addEventListener("mousemove", (e) => {
+            x = e.pageX;
+            y = e.pageY;
+        });
+
+        const loop = () => {
+            targetX += (x - targetX) * speed
+            targetY += (y - targetY) * speed;
+
+            cursorItem.style.transform = `translate(${targetX}px, ${targetY}px)`;
+
+            window.requestAnimationFrame(loop);
+        }
+
+        loop();
+    }
+</script>
+<style>
+    /* body {
+        background-color: rgb(50, 185, 144);
+        overflow: hidden;
+    }
+    .gateBox {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 400px;
+        transform: translate(-50%, -50%);
+    }
+    .gateBox .top {
+        padding: 10px 10px;
+        border: 2px solid white;
+        text-align: center;
+        color: #fff;
+        font-size: 20px;
+        font-weight: 700;
+
+    }
+    .gateBox .bottom {
+        border: 2px solid white;
+        border-top: 0;
+        display: flex;
+        justify-content: space-evenly;
+        width: 100%;
+        height: 70px;
+        box-sizing: border-box;
+    }
+    .bottom button {
+        color: #fff;
+        border: 0;
+        cursor: pointer;
+        width: 100%;
+        height: 100%;
+        font-weight: 700;
+        background-color: transparent;
+        transition: .3s;
+    }
+
+    .bottom button:hover {
+        background-color: #fff;
+        color: #333;
+    }
+
+    .cursorItem {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1000;
+        pointer-events: none;
+    }
+
+    .circle {
+        position: fixed;
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background: purple;
+        margin: -60px -60px;
+        transition: .3s;
+        opacity: 0.7;
+    } */
+</style>
+</html>
